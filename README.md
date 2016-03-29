@@ -7,12 +7,12 @@ Add this dependecy from jCenter:
 
 ## USAGE
 The first step to use the library is to initiate the deserializer with your classes.
-To show how it works, we will use the default JSON that is on jsonapi.org homepage and on ![raw folder](/app/src/main/res/raw/data.json).
+To show how it works, we will use the default JSON that is on jsonapi.org homepage and on [raw folder](/app/src/main/res/raw/data.json).
 
 ### FIRST STEP - *Create your models*
 All models to be conveted need to have two things.
-1. It need to inherit from ![Resource](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Models/Resource.java)
-2. It need to have the ![Type](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/Type.java) annotation on your class.
+* It need to inherit from [Resource](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Models/Resource.java)
+* It need to have the [Type](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/Type.java) annotation on your class.
 
 ```java
 import com.gustavofao.jsonapi.Annotatios.Type;
@@ -65,7 +65,7 @@ Article article = new Article();
 String jsonValue = api.toJson(article);
 ```
 
-> WARNING
+> **WARNING**
 > LINKS FIELDS ARE NOT GOING TO BE SERIALIZED. I'M WORKING ON IT FOR THE NEXT VERSION.
 
 #### DESERIALIZE FROM JSON
@@ -88,20 +88,20 @@ if (obj.getData().size() > 0) {
 }
 ```
 
-> WARNING
+> **WARNING**
 > DATA WILL ALWAYS COME AS LIST. YOU HAVE TO VERIFY IF THERE IS ONLY ONE OR MORE. I'M WORKING ON IT TOO.
 
 ### TIPS
 #### ONE-TO-MANY RELATION
-To handle with one-to-many relation, you have to use ![JSONList](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Models/JSONList.java) with the type of the Object.
+To handle with one-to-many relation, you have to use [JSONList](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Models/JSONList.java) with the type of the Object.
 Example below.
 
 #### CHANGE SERIALIZATION NAME
-To change the name of the object on the JSON, you can use the Annotation ![/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/SerialName.java](SerialName) on your field.
+To change the name of the object on the JSON, you can use the Annotation [/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/SerialName.java](SerialName) on your field.
 Example below.
 
 #### IGNORE FIELDS
-To ignore fields of the model, you have to use the Annotation ![Excluded](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/Excluded.java) on your field.
+To ignore fields of the model, you have to use the Annotation [Excluded](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/Excluded.java) on your field.
 Example below.
 
 ```java
