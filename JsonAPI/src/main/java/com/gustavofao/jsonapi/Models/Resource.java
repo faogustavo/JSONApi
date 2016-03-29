@@ -1,7 +1,7 @@
 package com.gustavofao.jsonapi.Models;
 
-import com.gustavofao.jsonapi.Annotatios.Excluded;
-import com.gustavofao.jsonapi.Annotatios.Id;
+import com.gustavofao.jsonapi.Annotations.Excluded;
+import com.gustavofao.jsonapi.Annotations.Id;
 
 public class Resource {
 

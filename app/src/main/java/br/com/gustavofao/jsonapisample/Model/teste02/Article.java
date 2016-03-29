@@ -1,8 +1,8 @@
 package br.com.gustavofao.jsonapisample.Model.teste02;
 
-import com.gustavofao.jsonapi.Annotatios.Excluded;
-import com.gustavofao.jsonapi.Annotatios.SerialName;
-import com.gustavofao.jsonapi.Annotatios.Type;
+import com.gustavofao.jsonapi.Annotations.Excluded;
+import com.gustavofao.jsonapi.Annotations.SerialName;
+import com.gustavofao.jsonapi.Annotations.Type;
 import com.gustavofao.jsonapi.Models.JSONList;
 import com.gustavofao.jsonapi.Models.Resource;
 

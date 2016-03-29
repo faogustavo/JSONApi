@@ -1,6 +1,6 @@
 package br.com.gustavofao.jsonapisample.Model.teste02;
 
-import com.gustavofao.jsonapi.Annotatios.Type;
+import com.gustavofao.jsonapi.Annotations.Type;
 import com.gustavofao.jsonapi.Models.Resource;
 
 @Type("comments")

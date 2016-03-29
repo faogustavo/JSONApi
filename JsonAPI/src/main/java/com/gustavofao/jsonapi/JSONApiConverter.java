@@ -2,10 +2,10 @@ package com.gustavofao.jsonapi;
 
 import android.util.Log;
 
-import com.gustavofao.jsonapi.Annotatios.Excluded;
-import com.gustavofao.jsonapi.Annotatios.Id;
-import com.gustavofao.jsonapi.Annotatios.SerialName;
-import com.gustavofao.jsonapi.Annotatios.Type;
+import com.gustavofao.jsonapi.Annotations.Excluded;
+import com.gustavofao.jsonapi.Annotations.Id;
+import com.gustavofao.jsonapi.Annotations.SerialName;
+import com.gustavofao.jsonapi.Annotations.Type;
 import com.gustavofao.jsonapi.Models.JSONApiObject;
 import com.gustavofao.jsonapi.Models.JSONList;
 import com.gustavofao.jsonapi.Models.Links;
@@ -14,7 +14,6 @@ import com.gustavofao.jsonapi.Models.Resource;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
