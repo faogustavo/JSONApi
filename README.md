@@ -97,7 +97,7 @@ To handle with one-to-many relation, you have to use [JSONList](/JsonAPI/src/mai
 Example below.
 
 #### CHANGE SERIALIZATION NAME
-To change the name of the object on the JSON, you can use the Annotation [/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/SerialName.java](SerialName) on your field.
+To change the name of the object on the JSON, you can use the Annotation [SerialName](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/SerialName.java) on your field.
 Example below.
 
 #### IGNORE FIELDS
