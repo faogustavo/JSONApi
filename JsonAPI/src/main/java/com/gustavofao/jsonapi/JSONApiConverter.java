@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 public class JSONApiConverter {
 
@@ -37,8 +38,8 @@ public class JSONApiConverter {
     private HashMap<String, Class<? extends Resource>> classesIndex;
 
     public JSONApiConverter(Class<? extends Resource>... classes) {
-        dateFormatFromServer = new SimpleDateFormat(DATE_FORMAT_FROM_SERVER);
-        dateFormatToServer = new SimpleDateFormat(DATE_FORMAT_TO_SERVER);
+        dateFormatFromServer = new SimpleDateFormat(DATE_FORMAT_FROM_SERVER, Locale.US);
+        dateFormatToServer = new SimpleDateFormat(DATE_FORMAT_TO_SERVER, Locale.US);
 
         classesIndex = new HashMap<>();
         List<Class<? extends Resource>> classList = Arrays.asList(classes);
@@ -51,8 +52,8 @@ public class JSONApiConverter {
     }
 
     public JSONApiConverter(HashMap<String, Class<? extends Resource>> classesIndex) {
-        dateFormatFromServer = new SimpleDateFormat(DATE_FORMAT_FROM_SERVER);
-        dateFormatToServer = new SimpleDateFormat(DATE_FORMAT_TO_SERVER);
+        dateFormatFromServer = new SimpleDateFormat(DATE_FORMAT_FROM_SERVER, Locale.US);
+        dateFormatToServer = new SimpleDateFormat(DATE_FORMAT_TO_SERVER, Locale.US);
 
         this.classesIndex = classesIndex;
     }

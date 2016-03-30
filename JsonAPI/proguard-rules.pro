@@ -15,3 +15,7 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-keepclassmembers class com.gustavofao.jsonapi.Models.JSONApiObject { com.gustavofao.jsonapi.Models.Links links; }
+-keepclassmembers class com.gustavofao.jsonapi.Models.JSONList { com.gustavofao.jsonapi.Models.Links links; }
+-keepclassmembers class com.gustavofao.jsonapi.Models.Resource { com.gustavofao.jsonapi.Models.Links links; }
+-keepclassmembers class com.gustavofao.jsonapi.Models.Resource { java.lang.String id; }
