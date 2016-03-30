@@ -7,7 +7,7 @@ A simple way to implement JSONApi specifications to convert Models to Json and J
 Add this dependecy from jCenter:
 
 ```gradle
-compile 'com.gustavofao:JSONApi:1.0@aar'
+compile 'com.gustavofao:JSONApi:1.0.1'
 ```
 
 ## USAGE
@@ -153,6 +153,13 @@ public class Article extends Resource {
     }
 }
 
+```
+
+#### MULTIPLE TYPE TO SAME OBJECT
+When you have different types for the same object you can use the annotation @Types(String[] value).
+
+```java
+@Types({"test", "test02"})
 ```
 
 ### Retrofit

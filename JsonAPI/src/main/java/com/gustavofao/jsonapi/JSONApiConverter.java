@@ -6,6 +6,7 @@ import com.gustavofao.jsonapi.Annotations.Excluded;
 import com.gustavofao.jsonapi.Annotations.Id;
 import com.gustavofao.jsonapi.Annotations.SerialName;
 import com.gustavofao.jsonapi.Annotations.Type;
+import com.gustavofao.jsonapi.Annotations.Types;
 import com.gustavofao.jsonapi.Models.JSONApiObject;
 import com.gustavofao.jsonapi.Models.JSONList;
 import com.gustavofao.jsonapi.Models.Links;
@@ -45,9 +46,17 @@ public class JSONApiConverter {
         List<Class<? extends Resource>> classList = Arrays.asList(classes);
 
         for (Class<? extends Resource> c : classList) {
-            String type = c.getAnnotation(Type.class).value();
-            Log.d("Adding Class " + c.getName(), "With type: " + type);
-            classesIndex.put(type, c);
+            if (c.getAnnotation(Type.class) != null) {
+                String type = c.getAnnotation(Type.class).value();
+                if (!classList.contains(type))
+                    classesIndex.put(type, c);
+            } else if (c.getAnnotation(Types.class) != null) {
+                String[] types = c.getAnnotation(Types.class).value();
+                for (String type : types) {
+                    if (!classList.contains(type))
+                        classesIndex.put(type, c);
+                }
+            }
         }
     }
 
