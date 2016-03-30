@@ -1,76 +1,609 @@
 {
-  "links": {
-    "self": "http://example.com/articles",
-    "next": "http://example.com/articles?page[offset]=2",
-    "last": "http://example.com/articles?page[offset]=10"
-  },
-  "data": [{
-    "type": "articles",
-    "id": "1",
-    "attributes": {
-      "title": "JSON API paints my bikeshed!"
-    },
-    "relationships": {
-      "author": {
-        "links": {
-          "self": "http://example.com/articles/1/relationships/author",
-          "related": "http://example.com/articles/1/author"
-        },
-        "data": { "type": "people", "id": "9" }
-      },
-      "comments": {
-        "links": {
-          "self": "http://example.com/articles/1/relationships/comments",
-          "related": "http://example.com/articles/1/comments"
-        },
-        "data": [
-          { "type": "comments", "id": "5" },
-          { "type": "comments", "id": "12" }
-        ]
+  "data": [
+    {
+      "id": "3",
+      "type": "professionals",
+      "attributes": {
+        "email": "edipaulo@teste.com",
+        "phone": null,
+        "cnpj": "33.963.778/0001-65",
+        "latitude": null,
+        "longitude": null,
+        "name": "Edi o",
+        "about": null,
+        "photo": "default-avatar.png",
+        "city-id": 2217,
+        "activity-list": [
+          "banhista_de_animais_domesticos",
+          "borracheiro"
+        ],
+        "activity-humanized": "Banhista De Animais Domesticos, Borracheiro",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-08-20T09:49:18-03:00",
+        "updated-at": "2015-08-20T09:50:13-03:00",
+        "favorited": false
       }
     },
-    "links": {
-      "self": "http://example.com/articles/1"
-    }
-  }],
-  "included": [{
-    "type": "people",
-    "id": "9",
-    "attributes": {
-      "first-name": "Dan",
-      "last-name": "Gebhardt",
-      "twitter": "dgeb"
-    },
-    "links": {
-      "self": "http://example.com/people/9"
-    }
-  }, {
-    "type": "comments",
-    "id": "5",
-    "attributes": {
-      "body": "First!"
-    },
-    "relationships": {
-      "author": {
-        "data": { "type": "people", "id": "2" }
+    {
+      "id": "4",
+      "type": "professionals",
+      "attributes": {
+        "email": "professional22@test.com",
+        "phone": null,
+        "cnpj": "33.963.778/0001-55",
+        "latitude": null,
+        "longitude": null,
+        "name": "Daniel Docki",
+        "about": null,
+        "photo": "default-avatar.png",
+        "city-id": 2217,
+        "activity-list": [
+          "eletricista"
+        ],
+        "activity-humanized": "Eletricista",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-08-20T10:03:31-03:00",
+        "updated-at": "2015-08-20T10:03:31-03:00",
+        "favorited": false
       }
     },
-    "links": {
-      "self": "http://example.com/comments/5"
-    }
-  }, {
-    "type": "comments",
-    "id": "12",
-    "attributes": {
-      "body": "I like XML better"
-    },
-    "relationships": {
-      "author": {
-        "data": { "type": "people", "id": "9" }
+    {
+      "id": "5",
+      "type": "professionals",
+      "attributes": {
+        "email": "professional222@test.com",
+        "phone": null,
+        "cnpj": "33.963.778/0001-55",
+        "latitude": null,
+        "longitude": null,
+        "name": "Daniel Docki",
+        "about": null,
+        "photo": "default-avatar.png",
+        "city-id": 2217,
+        "activity-list": [
+          "eletricista"
+        ],
+        "activity-humanized": "Eletricista",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-08-20T10:04:13-03:00",
+        "updated-at": "2015-08-20T10:04:13-03:00",
+        "favorited": false
       }
     },
-    "links": {
-      "self": "http://example.com/comments/12"
+    {
+      "id": "7",
+      "type": "professionals",
+      "attributes": {
+        "email": "wdi@test.com",
+        "phone": "(78)7888-9999",
+        "cnpj": "33.963.778/0001-55",
+        "latitude": -16.763784,
+        "longitude": -49.4377043,
+        "name": "Daniel Docki",
+        "about": "",
+        "photo": "https://aceleramei-uploads-staging.s3.amazonaws.com/uploads/user/photo/7/normal_file.jpeg",
+        "city-id": 2217,
+        "activity-list": [
+          "eletricista",
+          "assistencia_tecnica",
+          "instalacao_e_manutencao_de_ar_condicionado",
+          "propaganda"
+        ],
+        "activity-humanized": "Eletricista, Assistencia Tecnica, Instalacao E Manutencao De Ar Condicionado, Propaganda",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-08-22T23:06:13-03:00",
+        "updated-at": "2015-10-14T11:31:37-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "29",
+      "type": "self_employeds",
+      "attributes": {
+        "email": "viniciusaustria@gmail.com",
+        "phone": null,
+        "cnpj": "",
+        "latitude": -29.6873064,
+        "longitude": -53.8154769,
+        "name": "vinicius",
+        "about": "2134",
+        "photo": "default-avatar.png",
+        "city-id": 3936,
+        "activity-list": [
+          "informatica"
+        ],
+        "activity-humanized": "Informatica",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-10-27T09:49:05-02:00",
+        "updated-at": "2016-03-17T20:00:15-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "30",
+      "type": "professionals",
+      "attributes": {
+        "email": "rath@pop.com.br",
+        "phone": null,
+        "cnpj": "45423487000153",
+        "latitude": -29.6873064,
+        "longitude": -53.8154769,
+        "name": "rodrigo",
+        "about": "teste",
+        "photo": "default-avatar.png",
+        "city-id": 3936,
+        "activity-list": [
+          "eletricista"
+        ],
+        "activity-humanized": "Eletricista",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-10-28T17:38:26-02:00",
+        "updated-at": "2016-03-17T20:16:37-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "31",
+      "type": "self_employeds",
+      "attributes": {
+        "email": "123@123.com.br",
+        "phone": "",
+        "cnpj": "",
+        "latitude": null,
+        "longitude": null,
+        "name": "123",
+        "about": "123",
+        "photo": "default-avatar.png",
+        "city-id": 3936,
+        "activity-list": [
+          "eletricista"
+        ],
+        "activity-humanized": "Eletricista",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-10-29T12:01:42-02:00",
+        "updated-at": "2015-10-29T12:02:24-02:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "35",
+      "type": "professionals",
+      "attributes": {
+        "email": "djainrantunes@hotmail.com",
+        "phone": null,
+        "cnpj": "01500237078",
+        "latitude": -11.9077667,
+        "longitude": -61.7782068,
+        "name": "Dijair antunes ",
+        "about": "faço fretes e sou eletricista. ",
+        "photo": "default-avatar.png",
+        "city-id": 96,
+        "activity-list": [
+          "eletricista",
+          "fretes_carretos"
+        ],
+        "activity-humanized": "Eletricista, Fretes Carretos",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-11-23T16:32:33-02:00",
+        "updated-at": "2015-11-23T16:33:13-02:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "36",
+      "type": "other_professionals",
+      "attributes": {
+        "email": "juliano@sfhera.com.br",
+        "phone": null,
+        "cnpj": null,
+        "latitude": -29.6873064,
+        "longitude": -53.8154769,
+        "name": "Juliano Londero",
+        "about": "",
+        "photo": "default-avatar.png",
+        "city-id": 3936,
+        "activity-list": [
+          "informatica"
+        ],
+        "activity-humanized": "Informatica",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-12-14T23:56:41-02:00",
+        "updated-at": "2016-01-23T18:05:44-02:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "37",
+      "type": "professionals",
+      "attributes": {
+        "email": "faogustavo@gmail.com",
+        "phone": null,
+        "cnpj": "45.505.348/0001-79",
+        "latitude": 0,
+        "longitude": 0,
+        "name": "Gustavo F. Valvassori 37",
+        "about": "nenhuma",
+        "photo": "https://aceleramei-uploads-staging.s3.amazonaws.com/uploads/user/photo/37/normal_37-b44462f51ddb308781f8.jpg",
+        "city-id": 3936,
+        "activity-list": [
+          "informatica",
+          "jardineiro",
+          "outros"
+        ],
+        "activity-humanized": "Informatica, Jardineiro, Outros",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2016-03-08T19:05:48-03:00",
+        "updated-at": "2016-03-21T15:42:12-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "40",
+      "type": "professionals",
+      "attributes": {
+        "email": "faogustavo1@gmail.com",
+        "phone": null,
+        "cnpj": "86.933.514/0001-15",
+        "latitude": -29.6873064,
+        "longitude": -53.8154769,
+        "name": "Gustavo Fao",
+        "about": "",
+        "photo": "default-avatar.png",
+        "city-id": 3936,
+        "activity-list": [
+          "fretes_carretos",
+          "montagem_desmontagem_de_moveis"
+        ],
+        "activity-humanized": "Fretes Carretos, Montagem Desmontagem De Moveis",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2016-03-09T19:53:27-03:00",
+        "updated-at": "2016-03-09T19:53:27-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "41",
+      "type": "freelancers",
+      "attributes": {
+        "email": "faogustavo2@gmail.com",
+        "phone": null,
+        "cnpj": null,
+        "latitude": -29.6873064,
+        "longitude": -53.8154769,
+        "name": "Gustavo Fao",
+        "about": "",
+        "photo": "default-avatar.png",
+        "city-id": 3936,
+        "activity-list": [
+          "fretes_carretos",
+          "montagem_desmontagem_de_moveis"
+        ],
+        "activity-humanized": "Fretes Carretos, Montagem Desmontagem De Moveis",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2016-03-09T19:53:36-03:00",
+        "updated-at": "2016-03-09T19:53:36-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "44",
+      "type": "professionals",
+      "attributes": {
+        "email": "faogustavo22@gmail.com",
+        "phone": null,
+        "cnpj": "18.356.619/0001-07",
+        "latitude": -29.6873064,
+        "longitude": -53.8154769,
+        "name": "Gustavo Fao",
+        "about": "about test",
+        "photo": "default-avatar.png",
+        "city-id": 3936,
+        "activity-list": [
+          "assistencia_tecnica",
+          "montagem_desmontagem_de_moveis"
+        ],
+        "activity-humanized": "Assistencia Tecnica, Montagem Desmontagem De Moveis",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2016-03-14T11:06:26-03:00",
+        "updated-at": "2016-03-14T11:06:26-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "45",
+      "type": "professionals",
+      "attributes": {
+        "email": "professional1213@test.com",
+        "phone": null,
+        "cnpj": "67.676.273/0001-21",
+        "latitude": -16.763784,
+        "longitude": -49.4377043,
+        "name": "Daniels Docki",
+        "about": null,
+        "photo": "default-avatar.png",
+        "city-id": 2217,
+        "activity-list": [
+          "eletricista"
+        ],
+        "activity-humanized": "Eletricista",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2016-03-14T14:26:24-03:00",
+        "updated-at": "2016-03-14T14:26:24-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "46",
+      "type": "other_professionals",
+      "attributes": {
+        "email": "gfao@gmail.com",
+        "phone": null,
+        "cnpj": null,
+        "latitude": -29.6873064,
+        "longitude": -53.8154769,
+        "name": "Gustavo",
+        "about": "nada",
+        "photo": "default-avatar.png",
+        "city-id": 3936,
+        "activity-list": [
+          "reformas_consertos_construcao",
+          "instalacao_e_manutencao_de_ar_condicionado"
+        ],
+        "activity-humanized": "Reformas Consertos Construcao, Instalacao E Manutencao De Ar Condicionado",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2016-03-15T17:48:11-03:00",
+        "updated-at": "2016-03-15T17:48:12-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "47",
+      "type": "self_employeds",
+      "attributes": {
+        "email": "ggfao@gmail.com",
+        "phone": null,
+        "cnpj": null,
+        "latitude": 0,
+        "longitude": 0,
+        "name": "gustavo 47",
+        "about": "",
+        "photo": "https://aceleramei-uploads-staging.s3.amazonaws.com/uploads/user/photo/47/normal_47-90e4c317f6cfe1595d1c.jpg",
+        "city-id": 3936,
+        "activity-list": [
+          "instalacao_e_manutencao_de_ar_condicionado",
+          "aulas"
+        ],
+        "activity-humanized": "Instalacao E Manutencao De Ar Condicionado, Aulas",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2016-03-15T19:52:02-03:00",
+        "updated-at": "2016-03-18T15:01:52-03:00",
+        "favorited": true
+      }
+    },
+    {
+      "id": "6",
+      "type": "professionals",
+      "attributes": {
+        "email": "tes@test.com",
+        "phone": "(78) 7888-9999",
+        "cnpj": "33963778000155",
+        "latitude": -29.6873064,
+        "longitude": -53.8154769,
+        "name": "Usuario Teste",
+        "about": "Developer",
+        "photo": "https://aceleramei-uploads-staging.s3.amazonaws.com/uploads/user/photo/6/normal_6-85c70f6f4fc3e7b7eb82.jpg",
+        "city-id": 3936,
+        "activity-list": [
+          "eletricista",
+          "encanador",
+          "fretes_carretos",
+          "reformas_consertos_construcao"
+        ],
+        "activity-humanized": "Eletricista, Encanador, Fretes Carretos, Reformas Consertos Construcao",
+        "positive-votes-count": 1,
+        "negative-votes-count": 2,
+        "created-at": "2015-08-20T10:06:07-03:00",
+        "updated-at": "2016-03-22T19:42:36-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "25",
+      "type": "professionals",
+      "attributes": {
+        "email": "rodrigo.rath@gmail.com",
+        "phone": null,
+        "cnpj": "11.111.111/1111-11",
+        "latitude": -29.6873064,
+        "longitude": -53.8154769,
+        "name": "rodrigo",
+        "about": "teste",
+        "photo": "default-avatar.png",
+        "city-id": 3936,
+        "activity-list": [
+          "eletricista",
+          "encanador"
+        ],
+        "activity-humanized": "Eletricista, Encanador",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-09-19T09:40:09-03:00",
+        "updated-at": "2016-03-22T21:11:32-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "26",
+      "type": "professionals",
+      "attributes": {
+        "email": "mandapro@dorath.com.br",
+        "phone": "",
+        "cnpj": "11.111.111/1111-11",
+        "latitude": null,
+        "longitude": null,
+        "name": "Leta User",
+        "about": "",
+        "photo": "default-avatar.png",
+        "city-id": 3936,
+        "activity-list": [
+          "eletricista"
+        ],
+        "activity-humanized": "Eletricista",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-10-21T11:44:39-02:00",
+        "updated-at": "2016-03-22T21:14:53-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "27",
+      "type": "professionals",
+      "attributes": {
+        "email": "daniel.....docki@gmail.com",
+        "phone": null,
+        "cnpj": "92160258000173",
+        "latitude": -29.6873064,
+        "longitude": -53.8154769,
+        "name": "Daniel Docki",
+        "about": "",
+        "photo": "default-avatar.png",
+        "city-id": 3936,
+        "activity-list": [
+          "eletricista"
+        ],
+        "activity-humanized": "Eletricista",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-10-21T14:45:30-02:00",
+        "updated-at": "2016-03-23T16:55:56-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "32",
+      "type": "freelancers",
+      "attributes": {
+        "email": "daniel......docki@gmai.com",
+        "phone": null,
+        "cnpj": "",
+        "latitude": -29.6873064,
+        "longitude": -53.8154769,
+        "name": "Daniel Docki",
+        "about": "",
+        "photo": "default-avatar.png",
+        "city-id": 3936,
+        "activity-list": [
+          "encanador",
+          "reformas_consertos_construcao",
+          "instalacao_e_manutencao_de_ar_condicionado",
+          "fretes_carretos",
+          "aulas",
+          "assistencia_tecnica"
+        ],
+        "activity-humanized": "Encanador, Reformas Consertos Construcao, Instalacao E Manutencao De Ar Condicionado, Fretes Carretos, Aulas, Assistencia Tecnica",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-10-30T19:16:27-02:00",
+        "updated-at": "2016-03-23T16:56:06-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "18",
+      "type": "professionals",
+      "attributes": {
+        "email": "julianolondero@gmail.com",
+        "phone": null,
+        "cnpj": "04.492.741/0001-98",
+        "latitude": -29.6873064,
+        "longitude": -53.8154769,
+        "name": "juliano",
+        "about": "",
+        "photo": "default-avatar.png",
+        "city-id": 3936,
+        "activity-list": [
+          "encanador",
+          "fretes_carretos"
+        ],
+        "activity-humanized": "Encanador, Fretes Carretos",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-09-03T21:21:06-03:00",
+        "updated-at": "2016-03-24T15:48:32-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "28",
+      "type": "freelancers",
+      "attributes": {
+        "email": "edipaulo@gmail.com",
+        "phone": "(55) 8885-5555",
+        "cnpj": "",
+        "latitude": null,
+        "longitude": null,
+        "name": "Zanella Edip",
+        "about": "",
+        "photo": "https://aceleramei-uploads-staging.s3.amazonaws.com/uploads/user/photo/28/normal_28-d77ed1020460d77ea991.jpg",
+        "city-id": 2217,
+        "activity-list": [
+          "instalacao_e_manutencao_de_ar_condicionado",
+          "aulas"
+        ],
+        "activity-humanized": "Instalacao E Manutencao De Ar Condicionado, Aulas",
+        "positive-votes-count": 0,
+        "negative-votes-count": 0,
+        "created-at": "2015-10-23T10:07:52-02:00",
+        "updated-at": "2016-03-30T15:50:07-03:00",
+        "favorited": false
+      }
+    },
+    {
+      "id": "1",
+      "type": "professionals",
+      "attributes": {
+        "email": "professional@test.com",
+        "phone": "",
+        "cnpj": "76.603.467/0001-98",
+        "latitude": -30.0346471,
+        "longitude": -51.2176584,
+        "name": "Joao da Silva",
+        "about": "Pintor Foda!",
+        "photo": "https://aceleramei-uploads-staging.s3.amazonaws.com/uploads/user/photo/1/normal_1-095f7400658fafd86f84.jpg",
+        "city-id": 3896,
+        "activity-list": [
+          "Reformas / Consertos / Construção",
+          "eletricista",
+          "encanador",
+          "pintor",
+          "ruby on rails",
+          "teste"
+        ],
+        "activity-humanized": "Reformas / Consertos / Construção, Eletricista, Encanador, Pintor, Ruby On Rails, Teste",
+        "positive-votes-count": 1,
+        "negative-votes-count": 1,
+        "created-at": "2015-08-19T16:57:08-03:00",
+        "updated-at": "2016-03-30T16:11:54-03:00",
+        "favorited": false
+      }
     }
-  }]
+  ],
+  "links": {}
 }

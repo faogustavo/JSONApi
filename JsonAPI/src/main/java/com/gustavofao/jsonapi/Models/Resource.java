@@ -2,13 +2,17 @@ package com.gustavofao.jsonapi.Models;
 
 import com.gustavofao.jsonapi.Annotations.Excluded;
 import com.gustavofao.jsonapi.Annotations.Id;
+import com.gustavofao.jsonapi.Annotations.Type;
 import com.gustavofao.jsonapi.Annotations.Types;
 
 public class Resource {
 
     @Id
-    protected String id;
-    protected Links links;
+    private String id;
+    private Links links;
+
+    @Excluded
+    private String type;
 
     @Excluded
     protected boolean hasAttributes;
@@ -17,19 +21,17 @@ public class Resource {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Links getLinks() {
-        return links;
-    }
-
-    public void setLinks(Links links) {
-        this.links = links;
+    public String getType() {
+        if (Resource.class.getAnnotation(Type.class) != null)
+            return Resource.class.getAnnotation(Type.class).value();
+        return type;
     }
 
     public boolean hasAttributes() {
         return hasAttributes;
+    }
+
+    public Links getLinks() {
+        return links;
     }
 }

@@ -136,8 +136,28 @@ public class JSONApiConverter {
 
     private Resource resourceFromJson(JSONObject jsonObject, HashMap<String, Resource> includes, boolean checkIncludes)
             throws JSONException, IllegalAccessException, InstantiationException, ParseException, NoSuchFieldException {
-        Resource resource = classesIndex.get(jsonObject.getString("type")).newInstance();
-        resource.setId(jsonObject.getString("id"));
+        String typeString = jsonObject.getString("type");
+        Resource resource = classesIndex.get(typeString).newInstance();
+
+        Field idMainField = Resource.class.getDeclaredField("id");
+        Field typeMainField = Resource.class.getDeclaredField("type");
+        Field attrMainField = Resource.class.getDeclaredField("hasAttributes");
+
+        boolean oldIdAccessible = idMainField.isAccessible();
+        boolean oldTypeAccessible = typeMainField.isAccessible();
+        boolean oldAccessibleAccessible = attrMainField.isAccessible();
+
+        idMainField.setAccessible(true);
+        idMainField.set(resource, jsonObject.getString("id"));
+        idMainField.setAccessible(oldIdAccessible);
+
+        typeMainField.setAccessible(true);
+        typeMainField.set(resource, typeString);
+        typeMainField.setAccessible(oldTypeAccessible);
+
+        attrMainField.setAccessible(true);
+        attrMainField.setBoolean(resource, jsonObject.isNull("attributes"));
+        attrMainField.setAccessible(oldAccessibleAccessible);
 
         //Pega os atributos da classe
         List<Field> fields = getFields(new ArrayList<Field>(), resource.getClass());
@@ -150,53 +170,55 @@ public class JSONApiConverter {
                 fieldsHash.put(f.getName(), f);
         }
 
-        //Separa os atributos do JSON
-        JSONObject attributes = jsonObject.getJSONObject("attributes");
-        Iterator<String> it = attributes.keys();
+        if (!jsonObject.isNull("attributes")) {
+            //Separa os atributos do JSON
+            JSONObject attributes = jsonObject.getJSONObject("attributes");
+            Iterator<String> it = attributes.keys();
 
-        while (it.hasNext()) {
-            String attr = it.next();
-            Object value = attributes.get(attr);
+            while (it.hasNext()) {
+                String attr = it.next();
+                Object value = attributes.get(attr);
 
-            if (fieldsHash.containsKey(attr)) {
-                Field currentField = fieldsHash.get(attr);
-                Boolean oldAccessible = currentField.isAccessible();
-                currentField.setAccessible(true);
+                if (fieldsHash.containsKey(attr)) {
+                    Field currentField = fieldsHash.get(attr);
+                    Boolean oldAccessible = currentField.isAccessible();
+                    currentField.setAccessible(true);
 
-                if (value instanceof String) {
-                    if (currentField.getType().equals(char.class))
-                        currentField.setChar(resource, String.valueOf(value).charAt(0));
-                    else if (currentField.getType().equals(String.class))
-                        currentField.set(resource, value);
-                    else if (currentField.getType().equals(Date.class))
-                        currentField.set(resource, parseDate(String.valueOf(value)));
-                    else
-                        Log.e("JSONApiConverter", "Type not setted (" + currentField.getType().getName() + ")");
-                } else if (value instanceof Double || value instanceof Float) {
-                    if (currentField.getType().equals(Float.class))
-                        currentField.setDouble(resource, (float) value);
-                    else if (currentField.getType().equals(Double.class))
-                        currentField.setDouble(resource, (double) value);
-                } else if (value instanceof Integer) {
-                    currentField.setInt(resource, (int) value);
-                } else if (value instanceof Long) {
-                    currentField.setLong(resource, (long) value);
-                } else if (value instanceof Character) {
-                    currentField.setChar(resource, (char) value);
-                } else if (value instanceof Boolean) {
-                    currentField.setBoolean(resource, (boolean) value);
-                } else if (value instanceof JSONArray) {
-                    JSONArray array = (JSONArray) value;
-                    List<Object> arrayData = new ArrayList<>();
-                    if (array.length() > 0) {
-                        for (int i = 0; i < array.length(); i++) {
-                            arrayData.add(array.get(i));
+                    if (value instanceof String) {
+                        if (currentField.getType().equals(char.class))
+                            currentField.setChar(resource, String.valueOf(value).charAt(0));
+                        else if (currentField.getType().equals(String.class))
+                            currentField.set(resource, value);
+                        else if (currentField.getType().equals(Date.class))
+                            currentField.set(resource, parseDate(String.valueOf(value)));
+                        else
+                            Log.e("JSONApiConverter", "Type not setted (" + currentField.getType().getName() + ")");
+                    } else if (value instanceof Double || value instanceof Float) {
+                        if (currentField.getType().equals(Float.class))
+                            currentField.setDouble(resource, (float) value);
+                        else if (currentField.getType().equals(Double.class))
+                            currentField.setDouble(resource, (double) value);
+                    } else if (value instanceof Integer) {
+                        currentField.setInt(resource, (int) value);
+                    } else if (value instanceof Long) {
+                        currentField.setLong(resource, (long) value);
+                    } else if (value instanceof Character) {
+                        currentField.setChar(resource, (char) value);
+                    } else if (value instanceof Boolean) {
+                        currentField.setBoolean(resource, (boolean) value);
+                    } else if (value instanceof JSONArray) {
+                        JSONArray array = (JSONArray) value;
+                        List<Object> arrayData = new ArrayList<>();
+                        if (array.length() > 0) {
+                            for (int i = 0; i < array.length(); i++) {
+                                arrayData.add(array.get(i));
+                            }
                         }
+                        currentField.set(resource, arrayData);
                     }
-                    currentField.set(resource, arrayData);
-                }
 
-                currentField.setAccessible(oldAccessible);
+                    currentField.setAccessible(oldAccessible);
+                }
             }
         }
 
@@ -359,7 +381,7 @@ public class JSONApiConverter {
             JSONArray include = new JSONArray();
 
             //Processar os dados
-            content.put("type", resource.getClass().getAnnotation(Type.class).value());
+            content.put("type", resource.getType());
             for (Field field : fields) {
                 String fieldName = null;
                 Boolean oldAccessible = field.isAccessible();
