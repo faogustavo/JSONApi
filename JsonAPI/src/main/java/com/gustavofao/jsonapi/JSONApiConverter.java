@@ -44,8 +44,17 @@ public class JSONApiConverter {
         List<Class<? extends Resource>> classList = Arrays.asList(classes);
 
         for (Class<? extends Resource> c : classList) {
-            classesIndex.put(c.getAnnotation(Type.class).value(), c);
+            String type = c.getAnnotation(Type.class).value();
+            Log.d("Adding Class " + c.getName(), "With type: " + type);
+            classesIndex.put(type, c);
         }
+    }
+
+    public JSONApiConverter(HashMap<String, Class<? extends Resource>> classesIndex) {
+        dateFormatFromServer = new SimpleDateFormat(DATE_FORMAT_FROM_SERVER);
+        dateFormatToServer = new SimpleDateFormat(DATE_FORMAT_TO_SERVER);
+
+        this.classesIndex = classesIndex;
     }
 
     public JSONApiConverter withDateFormat(SimpleDateFormat dateFormat) {
@@ -74,6 +83,7 @@ public class JSONApiConverter {
 
     public JSONApiObject fromJson(String jsonObject) {
         try {
+//            Log.i("Converting", jsonObject);
             JSONApiObject jsonApiObject = new JSONApiObject();
             JSONObject json = new JSONObject(jsonObject);
             HashMap<String, Resource> includes = new HashMap<>();

@@ -1,9 +1,14 @@
-# JSONApi
+JSONApi [![Download](https://api.bintray.com/packages/faogustavo/maven/JSONApi/images/download.svg)](https://bintray.com/faogustavo/maven/JSONApi/_latestVersion) [![License](https://img.shields.io/hexpm/l/plug.svg)]() [![MinSDK](https://img.shields.io/badge/minSdk-15-brightgreen.svg)]()
+=================================================================================================================================================================
+
 A simple way to implement JSONApi specifications to convert Models to Json and Json to Models.
 
 ## INSTALL
 Add this dependecy from jCenter:
-*Awaiting dependecy*
+
+```gradle
+compile 'com.gustavofao:JSONApi:0.1'
+```
 
 ## USAGE
 The first step to use the library is to initiate the deserializer with your classes.
@@ -116,8 +121,8 @@ public class Article extends Resource {
 
     private String title;
     private JSONList<Comment> comments;
-    
-    @Excluded 
+
+    @Excluded
     private String blah;
 
     @SerialName("author")
@@ -148,6 +153,42 @@ public class Article extends Resource {
     }
 }
 
+```
+
+### Retrofit
+The library has integration with Retrofit.
+To use you have to pass the JSONConverterFactory as converterFactory and
+
+```java
+Retrofit retrofit = new Retrofit.Builder()
+    .addConverterFactory(JSONConverterFactory.create(Article.class, Comment.class, Person.class))
+    .baseUrl(url)
+    .build();
+```
+
+All requests have to be with parameter from server **JSONApiObject**.
+
+```java
+Call<JSONApiObject> obj = service.testRequest();
+obj.enqueue(new Callback<JSONApiObject>() {
+    @Override
+    public void onResponse(Call<JSONApiObject> call, Response<JSONApiObject> response) {
+        if (response.body() != null) {
+            if (response.body().getData().size() > 0) {
+                Toast.makeText(MainActivity.this, "Object With data", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "No Items", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(MainActivity.this, "Empty Body", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onFailure(Call<JSONApiObject> call, Throwable t) {
+        Toast.makeText(MainActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+    }
+});
 ```
 
 ## Thanks
