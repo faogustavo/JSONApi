@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -48,14 +49,16 @@ public class JSONApiConverter {
         for (Class<? extends Resource> c : classList) {
             if (c.getAnnotation(Type.class) != null) {
                 String type = c.getAnnotation(Type.class).value();
-                if (!classList.contains(type))
+                if (!classesIndex.containsKey(type))
                     classesIndex.put(type, c);
             } else if (c.getAnnotation(Types.class) != null) {
                 String[] types = c.getAnnotation(Types.class).value();
                 for (String type : types) {
-                    if (!classList.contains(type))
+                    if (!classesIndex.containsKey(type))
                         classesIndex.put(type, c);
                 }
+            } else {
+                Log.e("Classes", "No Annotation [" + c.getName() + "]");
             }
         }
     }
@@ -93,7 +96,6 @@ public class JSONApiConverter {
 
     public JSONApiObject fromJson(String jsonObject) {
         try {
-//            Log.i("Converting", jsonObject);
             JSONApiObject jsonApiObject = new JSONApiObject();
             JSONObject json = new JSONObject(jsonObject);
             HashMap<String, Resource> includes = new HashMap<>();
