@@ -22,8 +22,8 @@ public class Resource {
     }
 
     public String getType() {
-        if (Resource.class.getAnnotation(Type.class) != null)
-            return Resource.class.getAnnotation(Type.class).value();
+        if (getClass().getAnnotation(Type.class) != null)
+            return getClass().getAnnotation(Type.class).value();
         return type;
     }
 
