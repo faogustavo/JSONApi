@@ -491,7 +491,7 @@ public class JSONApiConverter {
     }
 
     private String getResourceTag(Resource resource) {
-        String type = resource.getClass().getAnnotation(Type.class).value();
+        String type = resource.getType();
         return (type + "|" + resource.getId());
     }
 
@@ -503,7 +503,7 @@ public class JSONApiConverter {
         List<Field> fields = getFields(new ArrayList<Field>(), resource.getClass());
         JSONObject jsonObject = new JSONObject();
 
-        jsonObject.put("type", resource.getClass().getAnnotation(Type.class).value());
+        jsonObject.put("type", ((Resource) resource).getType());
 
         for (Field field : fields) {
             Boolean oldAccessible = field.isAccessible();
@@ -524,7 +524,7 @@ public class JSONApiConverter {
         JSONObject attributes = new JSONObject();
         JSONObject relationship = new JSONObject();
 
-        content.put("type", resource.getClass().getAnnotation(Type.class).value());
+        content.put("type", ((Resource) resource).getType());
 
         for (Field field : fields) {
             if (Collection.class.isAssignableFrom(field.getType()))
