@@ -105,7 +105,7 @@ public class JSONApiConverter {
                 for (int i = 0; i < included.length(); i++) {
                     JSONObject each = included.getJSONObject(i);
                     String key = getResourceTag(each);
-                    includes.put(key, resourceFromJson(each, includes, false));
+                    includes.put(key, resourceFromJson(each, includes));
                 }
             }
 
@@ -114,12 +114,12 @@ public class JSONApiConverter {
                 if (data instanceof JSONObject) {
                     //Single Object
                     JSONObject objectData = (JSONObject) data;
-                    jsonApiObject.addData(resourceFromJson(objectData, includes, true));
+                    jsonApiObject.addData(resourceFromJson(objectData, includes));
                 } else if (data instanceof JSONArray) {
                     //ListObjects
                     JSONArray objectData = (JSONArray) data;
                     for (int i = 0; i < objectData.length(); i++) {
-                        jsonApiObject.addData(resourceFromJson(objectData.getJSONObject(i), includes, true));
+                        jsonApiObject.addData(resourceFromJson(objectData.getJSONObject(i), includes));
                     }
                 }
             }
@@ -134,7 +134,7 @@ public class JSONApiConverter {
         }
     }
 
-    private Resource resourceFromJson(JSONObject jsonObject, HashMap<String, Resource> includes, boolean checkIncludes)
+    private Resource resourceFromJson(JSONObject jsonObject, HashMap<String, Resource> includes)
             throws JSONException, IllegalAccessException, InstantiationException, ParseException, NoSuchFieldException {
         String typeString = jsonObject.getString("type");
         Resource resource = classesIndex.get(typeString).newInstance();
@@ -239,10 +239,10 @@ public class JSONApiConverter {
 
                     if (data instanceof JSONObject) {
                         JSONObject dataJson = (JSONObject) data;
+                        String keyRelation = getResourceTag(dataJson);
                         Object fieldValue = null;
 
-                        if (checkIncludes) {
-                            String keyRelation = getResourceTag(dataJson);
+                        if (includes.get(keyRelation) != null) {
                             fieldValue = includes.get(keyRelation);
                         } else {
                             if (dataJson.isNull("attributes")) {
@@ -258,7 +258,7 @@ public class JSONApiConverter {
                                 idField.set(fieldValue, id);
                                 idField.setAccessible(oldAcessible);
                             } else {
-                                fieldValue = resourceFromJson(dataJson, includes, false);
+                                fieldValue = resourceFromJson(dataJson, includes);
                             }
                         }
 
@@ -276,8 +276,8 @@ public class JSONApiConverter {
                         JSONArray dataJson = (JSONArray) data;
 
                         for (int i = 0; i < dataJson.length(); i++) {
-                            if (checkIncludes) {
-                                String keyRelation = getResourceTag(dataJson.getJSONObject(i));
+                            String keyRelation = getResourceTag(dataJson.getJSONObject(i));
+                            if (includes.get(keyRelation) != null) {
                                 relationList.add(includes.get(keyRelation));
                             } else {
                                 if (dataJson.getJSONObject(i).isNull("attributes")) {
@@ -289,7 +289,7 @@ public class JSONApiConverter {
 
                                     relationList.add(fieldValue);
                                 } else {
-                                    relationList.add(resourceFromJson(dataJson.getJSONObject(i), includes, false));
+                                    relationList.add(resourceFromJson(dataJson.getJSONObject(i), includes));
                                 }
                             }
                         }

@@ -24,6 +24,8 @@ public class Resource {
     public String getType() {
         if (getClass().getAnnotation(Type.class) != null)
             return getClass().getAnnotation(Type.class).value();
+        if (type == null && getClass().getAnnotation(Types.class).value() != null && getClass().getAnnotation(Types.class).value().length > 0)
+            return getClass().getAnnotation(Types.class).value()[0];
         return type;
     }
 
