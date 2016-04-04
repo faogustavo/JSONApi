@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        JSONApiConverter api = new JSONApiConverter(Professional.class);
+        JSONApiConverter api = new JSONApiConverter(Conversation.class, City.class, Message.class, User.class);
 
         InputStream is = getResources().openRawResource(R.raw.data);
         Writer writer = new StringWriter();
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         String json = writer.toString();
         JSONApiObject obj = api.fromJson(json);
-        Professional prof = (Professional) obj.getData(0);
+        Conversation prof = (Conversation) obj.getData(0);
         Log.d("BackToJson", api.toJson(prof));
     }
 

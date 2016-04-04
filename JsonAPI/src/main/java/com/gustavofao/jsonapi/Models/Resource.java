@@ -21,6 +21,10 @@ public class Resource {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getType() {
         if (getClass().getAnnotation(Type.class) != null)
             return getClass().getAnnotation(Type.class).value();
@@ -35,5 +39,9 @@ public class Resource {
 
     public Links getLinks() {
         return links;
+    }
+
+    public void setLinks(Links links) {
+        this.links = links;
     }
 }
