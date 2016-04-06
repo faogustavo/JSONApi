@@ -1,104 +1,11 @@
 {
-  "data": [
-    {
-      "id": "5",
-      "type": "conversations",
-      "attributes": {
-        "created-at": "2016-03-31T15:59:05-03:00",
-        "updated-at": "2016-03-31T17:40:47-03:00"
-      },
-      "relationships": {
-        "sender": {
-          "data": {
-            "id": "37",
-            "type": "other_professionals"
-          }
-        },
-        "recipient": {
-          "data": {
-            "id": "38",
-            "type": "consumers"
-          }
-        },
-        "last-message": {
-          "data": {
-            "id": "77",
-            "type": "messages"
-          }
-        }
-      }
+  "data": {
+    "id": "teste",
+    "type": "financials-resume",
+    "attributes": {
+      "balance": 2403.26,
+      "incomes": 2754.86,
+      "expenses": -351.6
     }
-  ],
-  "included": [
-    {
-      "id": "37",
-      "type": "other_professionals",
-      "attributes": {
-        "email": "faogustavo@gmail.com",
-        "phone": null,
-        "latitude": 0,
-        "longitude": 0,
-        "name": "Gustavo F. Valvassori 37",
-        "photo": "https://aceleramei-uploads-staging.s3.amazonaws.com/uploads/user/photo/37/normal_37-b44462f51ddb308781f8.jpg",
-        "random-pass": false,
-        "created-at": "2016-03-08T19:05:48-03:00",
-        "updated-at": "2016-03-31T11:32:30-03:00"
-      },
-      "relationships": {
-        "city": {
-          "data": {
-            "id": "3936",
-            "type": "cities"
-          }
-        }
-      }
-    },
-    {
-      "id": "38",
-      "type": "consumers",
-      "attributes": {
-        "email": "gustavo_valvassori@outlook.com",
-        "phone": null,
-        "latitude": 0,
-        "longitude": 0,
-        "name": "Gustavo Fão Valvassori 38",
-        "photo": "https://aceleramei-uploads-staging.s3.amazonaws.com/uploads/user/photo/38/normal_38-7459a0c5fd574a9bdd20.jpg",
-        "random-pass": true,
-        "created-at": "2016-03-08T20:39:31-03:00",
-        "updated-at": "2016-03-31T15:58:41-03:00"
-      },
-      "relationships": {
-        "city": {
-          "data": {
-            "id": "3936",
-            "type": "cities"
-          }
-        }
-      }
-    },
-    {
-      "id": "77",
-      "type": "messages",
-      "attributes": {
-        "body": "tudo bem?",
-        "created-at": "2016-03-31T17:40:47-03:00",
-        "updated-at": "2016-03-31T17:40:47-03:00"
-      },
-      "relationships": {
-        "user": {
-          "data": {
-            "id": "38",
-            "type": "consumers"
-          }
-        },
-        "conversation": {
-          "data": {
-            "id": "5",
-            "type": "conversations"
-          }
-        }
-      }
-    }
-  ],
-  "links": {}
+  }
 }

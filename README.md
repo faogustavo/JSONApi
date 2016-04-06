@@ -7,7 +7,7 @@ A simple way to implement JSONApi specifications to convert Models to Json and J
 Add this dependecy from jCenter:
 
 ```gradle
-compile 'com.gustavofao:JSONApi:1.0.4@aar'
+compile 'com.gustavofao:JSONApi:1.0.5@aar'
 ```
 
 If the installation fails, add this line to your gradle top level:

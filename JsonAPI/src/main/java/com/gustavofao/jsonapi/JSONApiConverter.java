@@ -148,7 +148,11 @@ public class JSONApiConverter {
         boolean oldAccessibleAccessible = attrMainField.isAccessible();
 
         idMainField.setAccessible(true);
-        idMainField.set(resource, jsonObject.getString("id"));
+        if (!jsonObject.isNull("id")) {
+            idMainField.set(resource, jsonObject.getString("id"));
+        } else {
+            idMainField.set(resource, "");
+        }
         idMainField.setAccessible(oldIdAccessible);
 
         typeMainField.setAccessible(true);
@@ -191,12 +195,16 @@ public class JSONApiConverter {
                             currentField.set(resource, value);
                         else if (currentField.getType().equals(Date.class))
                             currentField.set(resource, parseDate(String.valueOf(value)));
+                        else if (currentField.getType().equals(double.class) || currentField.getType().equals(Double.class))
+                            currentField.set(resource, Double.valueOf(String.valueOf(value)));
+                        else if (currentField.getType().equals(float.class) || currentField.getType().equals(Float.class))
+                            currentField.set(resource, Float.valueOf(String.valueOf(value)));
                         else
                             Log.e("JSONApiConverter", "Type not setted (" + currentField.getType().getName() + ")");
                     } else if (value instanceof Double || value instanceof Float) {
-                        if (currentField.getType().equals(Float.class))
+                        if (currentField.getType().equals(float.class) || currentField.getType().equals(Float.class))
                             currentField.setDouble(resource, (float) value);
-                        else if (currentField.getType().equals(Double.class))
+                        else if (currentField.getType().equals(double.class) || currentField.getType().equals(Double.class))
                             currentField.setDouble(resource, (double) value);
                     } else if (value instanceof Integer) {
                         currentField.setInt(resource, (int) value);
