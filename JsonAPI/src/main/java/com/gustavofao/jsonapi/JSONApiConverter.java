@@ -188,41 +188,46 @@ public class JSONApiConverter {
                     Boolean oldAccessible = currentField.isAccessible();
                     currentField.setAccessible(true);
 
-                    if (value instanceof String) {
-                        if (currentField.getType().equals(char.class))
-                            currentField.setChar(resource, String.valueOf(value).charAt(0));
-                        else if (currentField.getType().equals(String.class))
-                            currentField.set(resource, value);
-                        else if (currentField.getType().equals(Date.class))
-                            currentField.set(resource, parseDate(String.valueOf(value)));
-                        else if (currentField.getType().equals(double.class) || currentField.getType().equals(Double.class))
-                            currentField.set(resource, Double.valueOf(String.valueOf(value)));
-                        else if (currentField.getType().equals(float.class) || currentField.getType().equals(Float.class))
-                            currentField.set(resource, Float.valueOf(String.valueOf(value)));
-                        else
-                            Log.e("JSONApiConverter", "Type not setted (" + currentField.getType().getName() + ")");
-                    } else if (value instanceof Double || value instanceof Float) {
-                        if (currentField.getType().equals(float.class) || currentField.getType().equals(Float.class))
-                            currentField.setDouble(resource, (float) value);
-                        else if (currentField.getType().equals(double.class) || currentField.getType().equals(Double.class))
-                            currentField.setDouble(resource, (double) value);
-                    } else if (value instanceof Integer) {
-                        currentField.setInt(resource, (int) value);
-                    } else if (value instanceof Long) {
-                        currentField.setLong(resource, (long) value);
-                    } else if (value instanceof Character) {
-                        currentField.setChar(resource, (char) value);
-                    } else if (value instanceof Boolean) {
-                        currentField.setBoolean(resource, (boolean) value);
-                    } else if (value instanceof JSONArray) {
-                        JSONArray array = (JSONArray) value;
-                        List<Object> arrayData = new ArrayList<>();
-                        if (array.length() > 0) {
-                            for (int i = 0; i < array.length(); i++) {
-                                arrayData.add(array.get(i));
+                    try {
+                        if (value instanceof String) {
+                            if (currentField.getType().equals(char.class))
+                                currentField.setChar(resource, String.valueOf(value).charAt(0));
+                            else if (currentField.getType().equals(String.class))
+                                currentField.set(resource, value);
+                            else if (currentField.getType().equals(Date.class))
+                                currentField.set(resource, parseDate(String.valueOf(value)));
+                            else if (currentField.getType().equals(double.class) || currentField.getType().equals(Double.class))
+                                currentField.set(resource, Double.valueOf(String.valueOf(value)));
+                            else if (currentField.getType().equals(float.class) || currentField.getType().equals(Float.class))
+                                currentField.set(resource, Float.valueOf(String.valueOf(value)));
+                            else
+                                Log.e("JSONApiConverter", "Type not setted (" + currentField.getType().getName() + ")");
+                        } else if (value instanceof Double || value instanceof Float) {
+                            if (currentField.getType().equals(float.class) || currentField.getType().equals(Float.class))
+                                currentField.setDouble(resource, (float) value);
+                            else if (currentField.getType().equals(double.class) || currentField.getType().equals(Double.class))
+                                currentField.setDouble(resource, (double) value);
+                        } else if (value instanceof Integer) {
+                            currentField.setInt(resource, (int) value);
+                        } else if (value instanceof Long) {
+                            currentField.setLong(resource, (long) value);
+                        } else if (value instanceof Character) {
+                            currentField.setChar(resource, (char) value);
+                        } else if (value instanceof Boolean) {
+                            currentField.setBoolean(resource, (boolean) value);
+                        } else if (value instanceof JSONArray) {
+                            JSONArray array = (JSONArray) value;
+                            List<Object> arrayData = new ArrayList<>();
+                            if (array.length() > 0) {
+                                for (int i = 0; i < array.length(); i++) {
+                                    arrayData.add(array.get(i));
+                                }
                             }
+                            currentField.set(resource, arrayData);
                         }
-                        currentField.set(resource, arrayData);
+                    } catch (Exception ex) {
+                        System.err.println(String.format("Error setting attribute %s", attr));
+                        ex.printStackTrace();
                     }
 
                     currentField.setAccessible(oldAccessible);
