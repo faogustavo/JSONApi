@@ -7,7 +7,7 @@ A simple way to implement JSONApi specifications to convert Models to Json and J
 Add this dependecy from jCenter:
 
 ```gradle
-compile 'com.gustavofao:JSONApi:1.0.5@aar'
+compile 'com.gustavofao:JSONApi:1.0.6@aar'
 ```
 
 If the installation fails, add this line to your gradle top level:
@@ -203,6 +203,19 @@ obj.enqueue(new Callback<JSONApiObject>() {
     }
 });
 ```
+
+## SERIALIZATION MAPS
+
+At this moment we can do the mapping listed above (java -> Json):
+* String -> String
+* Date -> String
+* char -> String
+* double -> Double
+* float -> Double
+* int -> Integer
+* boolean -> Boolean
+* Map -> JSONObject 
+* Resouce -> Relationship + Include
 
 ## Thanks
 [AceleraMEI](http://www.aceleramei.com.br/) for suport the development.

@@ -1,4 +1,4 @@
-package br.com.gustavofao.jsonapisample;
+package br.com.gustavofao.jsonapisample.V2;
 
 
 import com.gustavofao.jsonapi.Annotations.Type;
@@ -34,4 +34,5 @@ public class FinancialResume extends Resource {
     public void setExpenses(double expenses) {
         this.expenses = expenses;
     }
+
 }
