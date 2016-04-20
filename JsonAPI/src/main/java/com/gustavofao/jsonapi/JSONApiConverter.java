@@ -464,6 +464,7 @@ public class JSONApiConverter {
                                         String key = it.next();
                                         obj.put(key, data.get(key));
                                     }
+                                    array.put(obj);
                                 } else if (listItem instanceof Resource) {
                                     JSONObject relationshipNode = null;
                                     JSONArray relationshipNodeData = null;
@@ -512,6 +513,16 @@ public class JSONApiConverter {
                             attributes.put(fieldName, field.getBoolean(resource));
                         } else if (field.get(resource) instanceof Date) {
                             attributes.put(fieldName, dateFormatToServer.format((Date) field.get(resource)).replace(" ", "T"));
+                        } else if (field.get(resource) instanceof Map) {
+                            JSONObject obj = new JSONObject();
+                            Map<String, Object> data = (Map) field.get(resource);
+
+                            Iterator<String> it = data.keySet().iterator();
+                            while (it.hasNext()) {
+                                String key = it.next();
+                                obj.put(key, data.get(key));
+                            }
+                            attributes.put(fieldName, obj);
                         } else if (field.get(resource) instanceof Resource) {
                             JSONObject relationshipNode = new JSONObject();
                             relationshipNode.put("data", getNodeAsRelationship(field.get(resource)));
