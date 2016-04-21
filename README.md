@@ -7,7 +7,7 @@ A simple way to implement JSONApi specifications to convert Models to Json and J
 Add this dependecy from jCenter:
 
 ```gradle
-compile 'com.gustavofao:JSONApi:1.0.6@aar'
+compile 'com.gustavofao:JSONApi:1.0.7@aar'
 ```
 
 If the installation fails, add this line to your gradle top level:
@@ -168,6 +168,34 @@ When you have different types for the same object you can use the annotation @Ty
 @Types({"test", "test02"})
 ```
 
+## ERRORS
+The documentation from errors can be found in [this link](http://jsonapi.org/examples/#error-objects-multiple-errors).
+To handle with it you have to check your **JSONApiObject** if it *hasErrors()*.
+
+```java
+JSONApiObject obj = api.fromJson(json);
+if (obj.hasErrors()) {
+    List<ErrorModel> errorList = obj.getErrors();
+    //Do Something with the errors
+} else {
+    //Handle with success conversion
+}
+```
+
+The attributes from ErrorModel are: 
+```java
+private String status;
+private String title;
+private String detail;
+private ErrorSource source;
+```
+
+And from ErrorSource:
+```java
+private String pointer;
+private String parameter;
+```
+
 ### Retrofit
 The library has integration with Retrofit.
 To use you have to pass the JSONConverterFactory as converterFactory and
@@ -187,10 +215,15 @@ obj.enqueue(new Callback<JSONApiObject>() {
     @Override
     public void onResponse(Call<JSONApiObject> call, Response<JSONApiObject> response) {
         if (response.body() != null) {
-            if (response.body().getData().size() > 0) {
-                Toast.makeText(MainActivity.this, "Object With data", Toast.LENGTH_SHORT).show();
+            if (response.body().hasErrors()) {
+                List<ErrorModel> errorList = response.body().getErrors();
+                //Do something with the errors
             } else {
-                Toast.makeText(MainActivity.this, "No Items", Toast.LENGTH_SHORT).show();
+                if (response.body().getData().size() > 0) {
+                    Toast.makeText(MainActivity.this, "Object With data", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "No Items", Toast.LENGTH_SHORT).show();
+                }
             }
         } else {
             Toast.makeText(MainActivity.this, "Empty Body", Toast.LENGTH_SHORT).show();

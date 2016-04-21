@@ -7,6 +7,8 @@ public class JSONApiObject {
 
     private List<Resource> data;
     private Links links;
+    private boolean hasErrors = true;
+    private List<ErrorModel> errors;
 
     public JSONApiObject() {
         data = new ArrayList<>();
@@ -34,5 +36,13 @@ public class JSONApiObject {
 
     public void setLinks(Links links) {
         this.links = links;
+    }
+
+    public boolean hasErrors() {
+        return hasErrors;
+    }
+
+    public List<ErrorModel> getErrors() {
+        return errors;
     }
 }

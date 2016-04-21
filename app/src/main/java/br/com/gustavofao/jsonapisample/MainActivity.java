@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gustavofao.jsonapi.JSONApiConverter;
+import com.gustavofao.jsonapi.Models.ErrorModel;
 import com.gustavofao.jsonapi.Models.JSONApiObject;
 
 import java.io.BufferedReader;
@@ -16,18 +17,17 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.com.gustavofao.jsonapisample.V2.Authorization;
 import br.com.gustavofao.jsonapisample.V2.City;
 import br.com.gustavofao.jsonapisample.V2.Contact;
 import br.com.gustavofao.jsonapisample.V2.Conversation;
-import br.com.gustavofao.jsonapisample.V2.Deal;
 import br.com.gustavofao.jsonapisample.V2.Financial;
 import br.com.gustavofao.jsonapisample.V2.FinancialAccount;
 import br.com.gustavofao.jsonapisample.V2.FinancialResume;
 import br.com.gustavofao.jsonapisample.V2.Message;
-import br.com.gustavofao.jsonapisample.V2.Session;
 import br.com.gustavofao.jsonapisample.V2.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,26 +43,12 @@ public class MainActivity extends AppCompatActivity {
                 City.class,
                 Contact.class,
                 Conversation.class,
-                Deal.class,
                 Financial.class,
                 FinancialAccount.class,
                 FinancialResume.class,
                 Message.class,
-                Session.class,
                 User.class
         );
-
-
-//        Session session = new Session();
-//        session.setUid("uid123");
-//        session.setDeviceId("device_id123");
-//
-//        Map<String, Object> info = new HashMap<>();
-//        info.put("name", "Nome do vivente");
-//        info.put("email", "email@vivente.com.br");
-//        session.setInfo(info);
-//
-//        Log.d("ToJsonWithMap", api.toJson(session));
 
         InputStream is = getResources().openRawResource(R.raw.data);
         Writer writer = new StringWriter();
@@ -78,8 +64,36 @@ public class MainActivity extends AppCompatActivity {
 
         String json = writer.toString();
         JSONApiObject obj = api.fromJson(json);
-        Session con = ((Session) obj.getData(0));
-        Log.d("BackToJSON", api.toJson(con));
+        if (obj.hasErrors()) {
+            List<ErrorModel> errorList = obj.getErrors();
+            for (ErrorModel model : errorList) {
+                StringBuilder builder = new StringBuilder();
+                if (model.getSource() != null) {
+                    if (model.getSource().getPointer() != null) {
+                        builder.append(String.format("Pointer: %s - ", model.getSource().getPointer()));
+                    }
+
+                    if (model.getSource().getParameter() != null) {
+                        builder.append(String.format("Parameter: %s - ", model.getSource().getParameter()));
+                    }
+                }
+
+                if (model.getDetail() != null) {
+                    builder.append(String.format("Details: %s - ", model.getDetail()));
+                }
+
+                if (model.getTitle() != null) {
+                    builder.append(String.format("Title: %s - ", model.getTitle()));
+                }
+
+                if (model.getStatus() != null) {
+                    builder.append(String.format("Status: %s - ", model.getStatus()));
+                }
+
+                Toast.makeText(MainActivity.this, builder.toString(), Toast.LENGTH_SHORT).show();
+            }
+        } else
+            Toast.makeText(MainActivity.this, "No Errors", Toast.LENGTH_SHORT).show();
     }
 
 }
