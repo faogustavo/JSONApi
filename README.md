@@ -228,7 +228,12 @@ obj.enqueue(new Callback<JSONApiObject>() {
                 }
             }
         } else {
-            Toast.makeText(MainActivity.this, "Empty Body", Toast.LENGTH_SHORT).show();
+            try {
+                JSONApiObject object = App.getConverter().fromJson(response.errorBody().string());
+                handleErrors(object.getErrors());
+            } catch (IOException e) {
+                Toast.makeText(MainActivity.this, "Empty Body", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
