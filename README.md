@@ -25,6 +25,8 @@ All models to be conveted need to have two things.
 * It need to inherit from [Resource](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Models/Resource.java)
 * It need to have the [Type](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/Type.java) annotation on your class.
 
+**You do not need to create a field name id. The Resouce class already have it.**
+
 ```java
 import com.gustavofao.jsonapi.Annotatios.Type;
 import com.gustavofao.jsonapi.Models.Resource;
