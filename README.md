@@ -21,7 +21,7 @@ The first step to use the library is to initiate the deserializer with your clas
 To show how it works, we will use the default JSON that is on jsonapi.org homepage and on [raw folder](/app/src/main/res/raw/data.json).
 
 ### FIRST STEP - *Create your models*
-All models to be converted need to have two things.
+All models to be converted need to:
 
 * Inherit from [Resource](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Models/Resource.java)
 * And have the [Type](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/Type.java) annotation.
