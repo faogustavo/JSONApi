@@ -538,7 +538,10 @@ public class JSONApiConverter {
                                     relationshipNode.put("data", relationshipNodeData);
 
                                     relationship.put(fieldName, relationshipNode);
-                                    include.put(getNodeAsInclude(listItem));
+
+                                    JSONObject obj = getNodeAsInclude(listItem);
+                                    if (obj != null)
+                                        include.put(obj);
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -581,7 +584,10 @@ public class JSONApiConverter {
                             relationshipNode.put("data", getNodeAsRelationship(field.get(resource)));
 
                             relationship.put(fieldName, relationshipNode);
-                            include.put(getNodeAsInclude(field.get(resource)));
+
+                            JSONObject obj = getNodeAsInclude(field.get(resource));
+                            if (obj != null)
+                                include.put(obj);
                         }
                     } catch (Exception ex) {
                         Log.e("JSONApiConverter", String.format("Failed to pass attribute %s", fieldName));
@@ -592,13 +598,17 @@ public class JSONApiConverter {
                 field.setAccessible(oldAccessible);
             }
 
-            content.put("attributes", attributes);
+            if (attributes.length() > 0)
+                content.put("attributes", attributes);
+
             if (relationship.length() > 0)
                 content.put("relationships", relationship);
 
-            mainNode.put("data", content);
             if (include.length() > 0)
                 mainNode.put("included", include);
+
+            mainNode.put("data", content);
+
         } catch (Exception ex) {
             //Tratar erros
             ex.printStackTrace();
@@ -687,10 +697,16 @@ public class JSONApiConverter {
             field.setAccessible(oldAccessible);
         }
 
-        content.put("attributes", attributes);
+        if (attributes.length() > 0)
+            content.put("attributes", attributes);
+
         if (relationship.length() > 0)
             content.put("relationships", relationship);
-        return content;
+
+        if (attributes.length() > 0 || relationship.length() > 0)
+            return content;
+
+        return null;
     }
 
     private List<Field> getFields(Class<?> type) {

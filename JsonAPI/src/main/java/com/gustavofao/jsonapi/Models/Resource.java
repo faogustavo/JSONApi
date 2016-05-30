@@ -31,11 +31,13 @@ public class Resource {
     }
 
     public String getType() {
+        if (type != null)
+            return type;
         if (getClass().getAnnotation(Type.class) != null)
             return getClass().getAnnotation(Type.class).value();
         if (type == null && getClass().getAnnotation(Types.class).value() != null && getClass().getAnnotation(Types.class).value().length > 0)
             return getClass().getAnnotation(Types.class).value()[0];
-        return type;
+        return "";
     }
 
     public boolean hasAttributes() {
@@ -60,10 +62,19 @@ public class Resource {
             boolean acessible = f.isAccessible();
             try {
                 f.setAccessible(true);
+                Object v1 = f.get(this);
+                Object v2 = f.get(o);
+
+                if (v1 == null && v2 == null)
+                    continue;
+
+                if ((v1 != null && v2 == null) || (v1 == null && v2 != null))
+                    return false;
+
                 if (!f.get(this).equals(f.get(o)))
                     return false;
             } catch (Exception e) {
-
+                e.printStackTrace();
             }finally {
                 f.setAccessible(acessible);
             }

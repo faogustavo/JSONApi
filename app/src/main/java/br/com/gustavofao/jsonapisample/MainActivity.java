@@ -4,30 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gustavofao.jsonapi.JSONApiConverter;
-import com.gustavofao.jsonapi.Models.ErrorModel;
-import com.gustavofao.jsonapi.Models.JSONApiObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import br.com.gustavofao.jsonapisample.V2.Authorization;
 import br.com.gustavofao.jsonapisample.V2.City;
-import br.com.gustavofao.jsonapisample.V2.Contact;
-import br.com.gustavofao.jsonapisample.V2.Conversation;
-import br.com.gustavofao.jsonapisample.V2.Financial;
-import br.com.gustavofao.jsonapisample.V2.FinancialAccount;
-import br.com.gustavofao.jsonapisample.V2.FinancialResume;
-import br.com.gustavofao.jsonapisample.V2.Message;
 import br.com.gustavofao.jsonapisample.V2.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,23 +19,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         JSONApiConverter api = new JSONApiConverter(
-                Authorization.class,
                 City.class,
-                Contact.class,
-                Conversation.class,
-                Financial.class,
-                FinancialAccount.class,
-                FinancialResume.class,
-                Message.class,
                 User.class
         );
 
-        if (new User().equals(new User()))
-            Toast.makeText(MainActivity.this, "Equal", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(MainActivity.this, "Not equals", Toast.LENGTH_SHORT).show();
+//        if (new User().equals(new User()))
+//            Toast.makeText(MainActivity.this, "Equal", Toast.LENGTH_SHORT).show();
+//        else
+//            Toast.makeText(MainActivity.this, "Not equals", Toast.LENGTH_SHORT).show();
 
-        Log.d("TAG", api.toJson(new User()));
+        User u = new User();
+        City city = new City();
+
+        city.setId("123");
+        u.setCity(city);
+
+        Log.d("TAG", api.toJson(u));
 
 //        InputStream is = getResources().openRawResource(R.raw.data);
 //        Writer writer = new StringWriter();
