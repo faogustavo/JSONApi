@@ -5,6 +5,11 @@ import com.gustavofao.jsonapi.Annotations.Id;
 import com.gustavofao.jsonapi.Annotations.Type;
 import com.gustavofao.jsonapi.Annotations.Types;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Resource {
 
     @Id
@@ -43,5 +48,38 @@ public class Resource {
 
     public void setLinks(Links links) {
         this.links = links;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() != getClass())
+            return false;
+
+        List<Field> fields = getFields(getClass());
+        for (Field f : fields) {
+            boolean acessible = f.isAccessible();
+            try {
+                f.setAccessible(true);
+                if (!f.get(this).equals(f.get(o)))
+                    return false;
+            } catch (Exception e) {
+
+            }finally {
+                f.setAccessible(acessible);
+            }
+        }
+
+        return true;
+    }
+
+    private static List<Field> getFields(Class<?> type) {
+        List<Field> fields = new ArrayList<>();
+        fields.addAll(Arrays.asList(type.getDeclaredFields()));
+
+        if (type.getSuperclass() != null && !type.getSuperclass().getName().equals(Object.class.getName())) {
+            fields.addAll(getFields(type.getSuperclass()));
+        }
+
+        return fields;
     }
 }

@@ -221,7 +221,7 @@ public class JSONApiConverter {
         attrMainField.setAccessible(oldAccessibleAccessible);
 
         //Pega os atributos da classe
-        List<Field> fields = getFields(new ArrayList<Field>(), resource.getClass());
+        List<Field> fields = getFields(resource.getClass());
         HashMap<String, Field> fieldsHash = new HashMap<>();
 
         for (Field f : fields) {
@@ -451,7 +451,14 @@ public class JSONApiConverter {
     }
 
     private JSONObject toJsonObject(Resource resource) {
-        List<Field> fields = getFields(new ArrayList<Field>(), resource.getClass());
+        try {
+            Resource ninstance = resource.getClass().newInstance();
+            if (resource.equals(ninstance)) {
+                return new JSONObject();
+            }
+        } catch (Exception e) {}
+
+        List<Field> fields = getFields(resource.getClass());
         JSONObject mainNode = new JSONObject();
 
         try {
@@ -610,7 +617,7 @@ public class JSONApiConverter {
     }
 
     private JSONObject getNodeAsRelationship(Object resource) throws JSONException, IllegalAccessException {
-        List<Field> fields = getFields(new ArrayList<Field>(), resource.getClass());
+        List<Field> fields = getFields(resource.getClass());
         JSONObject jsonObject = new JSONObject();
 
         jsonObject.put("type", ((Resource) resource).getType());
@@ -628,7 +635,7 @@ public class JSONApiConverter {
     }
 
     private JSONObject getNodeAsInclude(Object resource) throws JSONException, IllegalAccessException, ParseException {
-        List<Field> fields = getFields(new ArrayList<Field>(), resource.getClass());
+        List<Field> fields = getFields(resource.getClass());
 
         JSONObject content = new JSONObject();
         JSONObject attributes = new JSONObject();
@@ -686,11 +693,12 @@ public class JSONApiConverter {
         return content;
     }
 
-    private List<Field> getFields(List<Field> fields, Class<?> type) {
+    private List<Field> getFields(Class<?> type) {
+        List<Field> fields = new ArrayList<>();
         fields.addAll(Arrays.asList(type.getDeclaredFields()));
 
         if (type.getSuperclass() != null && !type.getSuperclass().getName().equals(Object.class.getName())) {
-            fields = getFields(fields, type.getSuperclass());
+            fields.addAll(getFields(type.getSuperclass()));
         }
 
         return fields;

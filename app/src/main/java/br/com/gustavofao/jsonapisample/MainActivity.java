@@ -50,50 +50,57 @@ public class MainActivity extends AppCompatActivity {
                 User.class
         );
 
-        InputStream is = getResources().openRawResource(R.raw.data);
-        Writer writer = new StringWriter();
-        char[] buffer = new char[1024];
-        try {
-            Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-            int n;
-            while ((n = reader.read(buffer)) != -1) {
-                writer.write(buffer, 0, n);
-            }
-            is.close();
-        } catch (Exception ex) {}
+        if (new User().equals(new User()))
+            Toast.makeText(MainActivity.this, "Equal", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(MainActivity.this, "Not equals", Toast.LENGTH_SHORT).show();
 
-        String json = writer.toString();
-        JSONApiObject obj = api.fromJson(json);
-        if (obj.hasErrors()) {
-            List<ErrorModel> errorList = obj.getErrors();
-            for (ErrorModel model : errorList) {
-                StringBuilder builder = new StringBuilder();
-                if (model.getSource() != null) {
-                    if (model.getSource().getPointer() != null) {
-                        builder.append(String.format("Pointer: %s - ", model.getSource().getPointer()));
-                    }
+        Log.d("TAG", api.toJson(new User()));
 
-                    if (model.getSource().getParameter() != null) {
-                        builder.append(String.format("Parameter: %s - ", model.getSource().getParameter()));
-                    }
-                }
-
-                if (model.getDetail() != null) {
-                    builder.append(String.format("Details: %s - ", model.getDetail()));
-                }
-
-                if (model.getTitle() != null) {
-                    builder.append(String.format("Title: %s - ", model.getTitle()));
-                }
-
-                if (model.getStatus() != null) {
-                    builder.append(String.format("Status: %s - ", model.getStatus()));
-                }
-
-                Toast.makeText(MainActivity.this, builder.toString(), Toast.LENGTH_SHORT).show();
-            }
-        } else
-            Toast.makeText(MainActivity.this, "No Errors", Toast.LENGTH_SHORT).show();
+//        InputStream is = getResources().openRawResource(R.raw.data);
+//        Writer writer = new StringWriter();
+//        char[] buffer = new char[1024];
+//        try {
+//            Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+//            int n;
+//            while ((n = reader.read(buffer)) != -1) {
+//                writer.write(buffer, 0, n);
+//            }
+//            is.close();
+//        } catch (Exception ex) {}
+//
+//        String json = writer.toString();
+//        JSONApiObject obj = api.fromJson(json);
+//        if (obj.hasErrors()) {
+//            List<ErrorModel> errorList = obj.getErrors();
+//            for (ErrorModel model : errorList) {
+//                StringBuilder builder = new StringBuilder();
+//                if (model.getSource() != null) {
+//                    if (model.getSource().getPointer() != null) {
+//                        builder.append(String.format("Pointer: %s - ", model.getSource().getPointer()));
+//                    }
+//
+//                    if (model.getSource().getParameter() != null) {
+//                        builder.append(String.format("Parameter: %s - ", model.getSource().getParameter()));
+//                    }
+//                }
+//
+//                if (model.getDetail() != null) {
+//                    builder.append(String.format("Details: %s - ", model.getDetail()));
+//                }
+//
+//                if (model.getTitle() != null) {
+//                    builder.append(String.format("Title: %s - ", model.getTitle()));
+//                }
+//
+//                if (model.getStatus() != null) {
+//                    builder.append(String.format("Status: %s - ", model.getStatus()));
+//                }
+//
+//                Toast.makeText(MainActivity.this, builder.toString(), Toast.LENGTH_SHORT).show();
+//            }
+//        } else
+//            Toast.makeText(MainActivity.this, "No Errors", Toast.LENGTH_SHORT).show();
     }
 
 }
