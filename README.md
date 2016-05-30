@@ -21,11 +21,12 @@ The first step to use the library is to initiate the deserializer with your clas
 To show how it works, we will use the default JSON that is on jsonapi.org homepage and on [raw folder](/app/src/main/res/raw/data.json).
 
 ### FIRST STEP - *Create your models*
-All models to be conveted need to have two things.
-* It need to inherit from [Resource](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Models/Resource.java)
-* It need to have the [Type](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/Type.java) annotation on your class.
+All models to be converted need to:
 
-**You do not need to create a field name id. The Resouce class already have it.**
+* Inherit from [Resource](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Models/Resource.java)
+* And have the [Type](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/Type.java) annotation.
+
+> **NOTE:** You do not need to create a field name id. The Resouce class already have it.
 
 ```java
 import com.gustavofao.jsonapi.Annotatios.Type;
@@ -106,15 +107,15 @@ if (obj.getData().size() > 0) {
 
 ### TIPS
 #### ONE-TO-MANY RELATION
-To handle with one-to-many relation, you have to use [JSONList](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Models/JSONList.java) with the type of the Object.
+To handle with one-to-many relation you have to use [JSONList](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Models/JSONList.java) with the type of the Object.
 Example below.
 
 #### CHANGE SERIALIZATION NAME
-To change the name of the object on the JSON, you can use the Annotation [SerialName](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/SerialName.java) on your field.
+To change the name of the object on the JSON you can use the Annotation [SerialName](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/SerialName.java) on your field.
 Example below.
 
 #### IGNORE FIELDS
-To ignore fields of the model, you have to use the Annotation [Excluded](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/Excluded.java) on your field.
+To ignore fields of the model you have to use the Annotation [Excluded](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/Excluded.java) on your field.
 Example below.
 
 ```java
@@ -258,7 +259,7 @@ At this moment we can do the mapping listed above (java -> Json):
 * Resouce -> Relationship + Include
 
 ## Thanks
-[AceleraMEI](http://www.aceleramei.com.br/) for suport the development.
+[AceleraMEI](http://www.aceleramei.com.br/) for support the development.
 
 ## License
     Copyright 2016 Gustavo Fão. All rights reserved.
