@@ -1,4 +1,4 @@
-JSONApi [![Download](https://api.bintray.com/packages/faogustavo/maven/JSONApi/images/download.svg)](https://bintray.com/faogustavo/maven/JSONApi/_latestVersion) [![License](https://img.shields.io/hexpm/l/plug.svg)]() [![MinSDK](https://img.shields.io/badge/minSdk-15-brightgreen.svg)]()
+JSONApi [![Download](https://api.bintray.com/packages/faogustavo/maven/JSONApi/images/download.svg)](https://bintray.com/faogustavo/maven/JSONApi/_latestVersion) [![License](https://img.shields.io/hexpm/l/plug.svg)]() [![MinSDK](https://img.shields.io/badge/minSdk-9-brightgreen.svg)]()
 =================================================================================================================================================================
 
 A simple way to implement JSONApi specifications to convert Models to Json and Json to Models.
@@ -7,7 +7,7 @@ A simple way to implement JSONApi specifications to convert Models to Json and J
 Add this dependecy from jCenter:
 
 ```gradle
-compile 'com.gustavofao:JSONApi:1.0.9@aar'
+compile 'com.gustavofao:JSONApi:1.0.9.1@aar'
 ```
 
 If the installation fails, add this line to your gradle top level:

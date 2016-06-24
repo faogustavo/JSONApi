@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.gustavofao.jsonapi.JSONApiConverter;
 
 import br.com.gustavofao.jsonapisample.V2.City;
+import br.com.gustavofao.jsonapisample.V2.Person;
 import br.com.gustavofao.jsonapisample.V2.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,21 +21,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         JSONApiConverter api = new JSONApiConverter(
                 City.class,
-                User.class
+                User.class,
+                Person.class
         );
+
+        Person p = new Person();
+        p.setId("id-01");
+        p.setName("Gustavo");
+        p.setFirstName("Gustavo");
+        p.setPseudo("faogustavo");
+        p.setCity("Santa Maria - RS, Brazil");
+        p.setEmail("faogustavo@gmail.com");
+
+        String jsonValue = api.toJson(p);
+        Log.d("JSONApi", jsonValue);
+
+        Person p2 = ((Person) api.fromJson(jsonValue).getData(0));
+        String jsonValue2 = api.toJson(p2);
+        Log.d("JSONApi", jsonValue2);
 
 //        if (new User().equals(new User()))
 //            Toast.makeText(MainActivity.this, "Equal", Toast.LENGTH_SHORT).show();
 //        else
 //            Toast.makeText(MainActivity.this, "Not equals", Toast.LENGTH_SHORT).show();
 
-        User u = new User();
-        City city = new City();
-
-        city.setId("123");
-        u.setCity(city);
-
-        Log.d("TAG", api.toJson(u));
+//        User u = new User();
+//        City city = new City();
+//
+//        city.setId("123");
+//        u.setCity(city);
+//
+//        Log.d("TAG", api.toJson(u));
 
 //        InputStream is = getResources().openRawResource(R.raw.data);
 //        Writer writer = new StringWriter();
