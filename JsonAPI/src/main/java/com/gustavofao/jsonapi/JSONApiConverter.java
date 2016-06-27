@@ -185,8 +185,8 @@ public class JSONApiConverter {
                 hasErrors.setAccessible(oldAcessible);
             }
         } catch (Exception ex) {
-            jsonApiObject = null;
-            Log.e(JSONApiConverter.class.getSimpleName(), ex.getMessage());
+            Log.e(JSONApiConverter.class.getSimpleName(), "Here _ " + ex.getMessage());
+            ex.printStackTrace();
         }
         return jsonApiObject;
     }
@@ -365,6 +365,13 @@ public class JSONApiConverter {
                                     String type = dataJson.getJSONObject(i).getString("type");
 
                                     Resource fieldValue = classesIndex.get(type).newInstance();
+
+                                    Field idField = Resource.class.getDeclaredField("id");
+                                    boolean oldAcessible = idField.isAccessible();
+
+                                    idField.setAccessible(true);
+                                    idField.set(fieldValue, id);
+                                    idField.setAccessible(oldAcessible);
                                     fieldValue.getClass().getDeclaredField("id").set(fieldValue, id);
 
                                     relationList.add(fieldValue);

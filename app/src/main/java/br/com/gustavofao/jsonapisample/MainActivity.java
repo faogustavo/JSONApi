@@ -6,8 +6,17 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.gustavofao.jsonapi.JSONApiConverter;
+import com.gustavofao.jsonapi.Models.JSONApiObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
 
 import br.com.gustavofao.jsonapisample.V2.City;
+import br.com.gustavofao.jsonapisample.V2.Conversation;
 import br.com.gustavofao.jsonapisample.V2.Person;
 import br.com.gustavofao.jsonapisample.V2.User;
 
@@ -22,23 +31,44 @@ public class MainActivity extends AppCompatActivity {
         JSONApiConverter api = new JSONApiConverter(
                 City.class,
                 User.class,
-                Person.class
+                Person.class,
+                Conversation.class
         );
 
-        Person p = new Person();
-        p.setId("id-01");
-        p.setName("Gustavo");
-        p.setFirstName("Gustavo");
-        p.setPseudo("faogustavo");
-        p.setCity("Santa Maria - RS, Brazil");
-        p.setEmail("faogustavo@gmail.com");
+        InputStream is = getResources().openRawResource(R.raw.data);
+        Writer writer = new StringWriter();
+        char[] buffer = new char[1024];
+        try {
+            Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            int n;
+            while ((n = reader.read(buffer)) != -1) {
+                writer.write(buffer, 0, n);
+            }
+            is.close();
+        } catch (Exception ex) {}
 
-        String jsonValue = api.toJson(p);
-        Log.d("JSONApi", jsonValue);
+        String json = writer.toString();
+        Log.d("JSONApi", String.format("Start json = %s", json));
 
-        Person p2 = ((Person) api.fromJson(jsonValue).getData(0));
-        String jsonValue2 = api.toJson(p2);
-        Log.d("JSONApi", jsonValue2);
+        Conversation obj = ((Conversation) api.fromJson(json).getData(0));
+        Log.d("JSONApi", String.format("ID = %s", obj.getPerson().getId()));
+
+        Log.d("JSONApi", String.format("Back as json = %s", api.toJson(obj)));
+
+//        Person p = new Person();
+//        p.setId("id-01");
+//        p.setName("Gustavo");
+//        p.setFirstName("Gustavo");
+//        p.setPseudo("faogustavo");
+//        p.setCity("Santa Maria - RS, Brazil");
+//        p.setEmail("faogustavo@gmail.com");
+//
+//        String jsonValue = api.toJson(p);
+//        Log.d("JSONApi", jsonValue);
+//
+//        Person p2 = ((Person) api.fromJson(jsonValue).getData(0));
+//        String jsonValue2 = api.toJson(p2);
+//        Log.d("JSONApi", jsonValue2);
 
 //        if (new User().equals(new User()))
 //            Toast.makeText(MainActivity.this, "Equal", Toast.LENGTH_SHORT).show();
