@@ -372,7 +372,6 @@ public class JSONApiConverter {
                                     idField.setAccessible(true);
                                     idField.set(fieldValue, id);
                                     idField.setAccessible(oldAcessible);
-                                    fieldValue.getClass().getDeclaredField("id").set(fieldValue, id);
 
                                     relationList.add(fieldValue);
                                 } else {
