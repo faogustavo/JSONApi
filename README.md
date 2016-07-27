@@ -26,7 +26,9 @@ All models to be converted need to:
 * Inherit from [Resource](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Models/Resource.java)
 * And have the [Type](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/Type.java) annotation.
 
-> **NOTE:** You do not need to create a field name id. The Resouce class already have it.
+> **NOTE:**
+* Do not need to create a field name id. The Resouce class already have it.
+* Do include an empty/ zero argument constructor
 
 ```java
 import com.gustavofao.jsonapi.Annotatios.Type;
@@ -37,6 +39,11 @@ public class Comment extends Resource {
 
     private String body;
     private Person author;
+    
+    /*
+    Important: If you leave this out, de-serialisation might fail "... has no zero argument constructor"
+    */
+    public Comment() {}
 
     public String getBody() {
         return body;
