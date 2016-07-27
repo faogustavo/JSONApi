@@ -27,7 +27,7 @@ All models to be converted need to:
 * And have the [Type](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/Type.java) annotation.
 
 > **NOTE:**
-* Do not need to create a field name id. The Resouce class already have it.
+* Do not include a field name "id" or "type" as those two fields are taken care of by [Resource](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Models/Resource.java) and [Type](/JsonAPI/src/main/java/com/gustavofao/jsonapi/Annotations/Type.java)
 * Do include an empty/ zero argument constructor
 
 ```java
