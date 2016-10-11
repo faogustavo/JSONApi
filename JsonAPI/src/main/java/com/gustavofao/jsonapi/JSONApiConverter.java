@@ -312,6 +312,12 @@ public class JSONApiConverter {
                 JSONObject eachRelation = relationships.getJSONObject(key);
 
                 Object data = eachRelation.get("data");
+
+                if (data == null || data == JSONObject.NULL) {
+                    //Forcing the data to be an actual object in order to keep parsing the links on data:null
+                    data = new JSONArray();
+                }
+
                 if (fieldsHash.containsKey(key)){
                     Field field = fieldsHash.get(key);
                     Boolean oldAccessible = field.isAccessible();
