@@ -1,12 +1,11 @@
 package br.com.gustavofao.jsonapisample;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.gustavofao.jsonapi.JSONApiConverter;
-import com.gustavofao.jsonapi.Models.JSONApiObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -52,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         Conversation obj = ((Conversation) api.fromJson(json).getData(0));
         Log.d("JSONApi", String.format("ID = %s", obj.getPerson().getId()));
+        Log.d("JSONApi", String.format("status = %s", obj.getPerson().getUserStatus().name()));
 
         Log.d("JSONApi", String.format("Back as json = %s", api.toJson(obj)));
 
