@@ -18,7 +18,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -257,6 +256,8 @@ public class JSONApiConverter {
                                 currentField.set(resource, Double.valueOf(String.valueOf(value)));
                             else if (currentField.getType().equals(float.class) || currentField.getType().equals(Float.class))
                                 currentField.set(resource, Float.valueOf(String.valueOf(value)));
+                            else if (currentField.getType().isEnum())
+                                currentField.set(resource, Enum.valueOf((Class<Enum>) currentField.getType(), String.valueOf(value)));
                             else
                                 Log.e("JSONApiConverter", "Type not setted (" + currentField.getType().getName() + ")");
                         } else if (value instanceof Double || value instanceof Float) {
@@ -294,6 +295,7 @@ public class JSONApiConverter {
                             currentField.set(resource, arrayData);
                         }
                     } catch (Exception ex) {
+                        ex.printStackTrace();
                         Log.e("JSONApiConverter", String.format("Failed to pass attribute %s", attr));
                     }
 
