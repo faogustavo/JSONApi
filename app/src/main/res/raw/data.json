@@ -20,7 +20,8 @@
       "type": "person",
       "id": "451",
       "attributes": {
-        "name": "Gustavo Fão Valvassori"
+        "name": "Gustavo Fão Valvassori",
+        "userStatus":"GUEST"
       }
     }
   ],
