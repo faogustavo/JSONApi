@@ -3,8 +3,11 @@ package br.com.gustavofao.jsonapisample.V2;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.gustavofao.jsonapi.Annotations.SerialName;
 import com.gustavofao.jsonapi.Annotations.Type;
 import com.gustavofao.jsonapi.Models.Resource;
+
+import java.io.Serializable;
 
 @Type("person")
 public class Person extends Resource implements Parcelable {
@@ -14,6 +17,7 @@ public class Person extends Resource implements Parcelable {
     private String pseudo;
     private String city;
     private String email;
+    private UserStatus userStatus;
 
     public Person() {}
 
@@ -57,8 +61,16 @@ public class Person extends Resource implements Parcelable {
         this.email = email;
     }
 
+    public UserStatus getUserStatus() {
+        return userStatus;
+    }
 
-    // =============================================================================================
+    public void setUserStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
+    }
+
+
+// =============================================================================================
     // Parcelable Interface
 
     public final static Parcelable.Creator<Person> CREATOR = new Parcelable.Creator<Person>() {
@@ -88,6 +100,7 @@ public class Person extends Resource implements Parcelable {
         dest.writeString(pseudo);
         dest.writeString(email);
         dest.writeString(city);
+        dest.writeString(userStatus.name());
     }
 
     private void readFromParcel(final Parcel in) {
@@ -97,5 +110,11 @@ public class Person extends Resource implements Parcelable {
         pseudo = in.readString();
         email = in.readString();
         city = in.readString();
+        userStatus = UserStatus.valueOf(in.readString());
+    }
+
+    public enum UserStatus implements Serializable {
+        @SerialName("USER") USER,
+        @SerialName("GUEST") GUEST,
     }
 }
