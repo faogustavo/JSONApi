@@ -356,6 +356,7 @@ public class JSONApiConverter {
                                         .set(fieldValue, linksFromJson(((JSONObject) data)
                                                 .getJSONObject("links")));
                             }
+
                             field.set(resource, fieldValue);
                         }
                     } else if (data instanceof JSONArray) {
@@ -390,6 +391,7 @@ public class JSONApiConverter {
                         if (!eachRelation.isNull("links")) {
                             relationList.setLinks(linksFromJson(eachRelation.getJSONObject("links")));
                         }
+
                         field.set(resource, relationList);
                     }
                     field.setAccessible(oldAccessible);
