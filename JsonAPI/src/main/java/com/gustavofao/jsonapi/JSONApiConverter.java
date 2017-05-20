@@ -18,7 +18,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -109,7 +108,6 @@ public class JSONApiConverter {
                     for (int i = 0; i < included.length(); i++) {
                         JSONObject each = included.getJSONObject(i);
                         String key = getResourceTag(each);
-
                         includes.put(key, resourceFromJson(each, includes));
                     }
 
@@ -140,6 +138,9 @@ public class JSONApiConverter {
 
                 if (!json.isNull("links"))
                     jsonApiObject.setLinks(linksFromJson(json.getJSONObject("links")));
+
+                if (!json.isNull("meta"))
+                    jsonApiObject.setMeta(json.getJSONObject("meta"));
 
                 Field hasErrors = jsonApiObject.getClass().getDeclaredField("hasErrors");
                 boolean oldAcessible = hasErrors.isAccessible();
@@ -354,7 +355,6 @@ public class JSONApiConverter {
                                         .set(fieldValue, linksFromJson(((JSONObject) data)
                                                 .getJSONObject("links")));
                             }
-
                             field.set(resource, fieldValue);
                         }
                     } else if (data instanceof JSONArray) {
@@ -389,7 +389,6 @@ public class JSONApiConverter {
                         if (!eachRelation.isNull("links")) {
                             relationList.setLinks(linksFromJson(eachRelation.getJSONObject("links")));
                         }
-
                         field.set(resource, relationList);
                     }
                     field.setAccessible(oldAccessible);
