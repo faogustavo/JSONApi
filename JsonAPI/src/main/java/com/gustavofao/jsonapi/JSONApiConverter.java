@@ -108,6 +108,7 @@ public class JSONApiConverter {
                     for (int i = 0; i < included.length(); i++) {
                         JSONObject each = included.getJSONObject(i);
                         String key = getResourceTag(each);
+
                         includes.put(key, resourceFromJson(each, includes));
                     }
 
