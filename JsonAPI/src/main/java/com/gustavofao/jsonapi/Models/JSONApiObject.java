@@ -1,5 +1,7 @@
 package com.gustavofao.jsonapi.Models;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ public class JSONApiObject {
     private Links links;
     private boolean hasErrors = true;
     private List<ErrorModel> errors;
+    private JSONObject meta;
 
     public JSONApiObject() {
         data = new ArrayList<>();
@@ -45,4 +48,13 @@ public class JSONApiObject {
     public List<ErrorModel> getErrors() {
         return errors;
     }
+
+    public JSONObject getMeta() {
+      return meta;
+    }
+
+    public void setMeta(JSONObject meta) {
+      this.meta = meta;
+    }
+
 }

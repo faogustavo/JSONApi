@@ -18,7 +18,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -140,6 +139,9 @@ public class JSONApiConverter {
 
                 if (!json.isNull("links"))
                     jsonApiObject.setLinks(linksFromJson(json.getJSONObject("links")));
+
+                if (!json.isNull("meta"))
+                    jsonApiObject.setMeta(json.getJSONObject("meta"));
 
                 Field hasErrors = jsonApiObject.getClass().getDeclaredField("hasErrors");
                 boolean oldAcessible = hasErrors.isAccessible();

@@ -7,7 +7,7 @@ A simple way to implement JSONApi specifications to convert Models to Json and J
 Add this dependecy from jCenter:
 
 ```gradle
-compile 'com.gustavofao:JSONApi:1.0.9.3@aar'
+compile 'com.gustavofao:JSONApi:1.0.9.4@aar'
 ```
 
 If the installation fails, add this line to your gradle top level:
@@ -39,7 +39,7 @@ public class Comment extends Resource {
 
     private String body;
     private Person author;
-    
+
     /*
     Important: If you leave this out, de-serialisation might fail "... has no zero argument constructor"
     */
@@ -178,6 +178,14 @@ When you have different types for the same object you can use the annotation @Ty
 @Types({"test", "test02"})
 ```
 
+#### METADATA
+Meta data can be retrieved from the JSONApiObject using getMeta()
+
+```java
+JSONApiObject obj = api.fromJson(json);
+JSONObject meta = obj.getMeta();
+```
+
 ## ERRORS
 The documentation from errors can be found in [this link](http://jsonapi.org/examples/#error-objects-multiple-errors).
 To handle with it you have to check your **JSONApiObject** if it *hasErrors()*.
@@ -192,7 +200,7 @@ if (obj.hasErrors()) {
 }
 ```
 
-The attributes from ErrorModel are: 
+The attributes from ErrorModel are:
 ```java
 private String status;
 private String title;
@@ -262,7 +270,7 @@ At this moment we can do the mapping listed above (java -> Json):
 * float -> Double
 * int -> Integer
 * boolean -> Boolean
-* Map -> JSONObject 
+* Map -> JSONObject
 * Resouce -> Relationship + Include
 
 ## Thanks
