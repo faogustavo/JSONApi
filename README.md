@@ -1,4 +1,4 @@
-JSONApi [![Download](https://api.bintray.com/packages/faogustavo/maven/JSONApi/images/download.svg)](https://bintray.com/faogustavo/maven/JSONApi/_latestVersion) [![License](https://img.shields.io/hexpm/l/plug.svg)]() [![MinSDK](https://img.shields.io/badge/minSdk-9-brightgreen.svg)]()
+JSONApi [![Download](https://api.bintray.com/packages/faogustavo/maven/JSONApi/images/download.svg)](https://bintray.com/faogustavo/maven/JSONApi/_latestVersion) [![License](https://img.shields.io/hexpm/l/plug.svg)]() [![MinSDK](https://img.shields.io/badge/minSdk-15-brightgreen.svg)]()
 =================================================================================================================================================================
 
 A simple way to implement JSONApi specifications to convert Models to Json and Json to Models.
@@ -7,10 +7,10 @@ A simple way to implement JSONApi specifications to convert Models to Json and J
 Add this dependecy from jCenter:
 
 ```gradle
-compile 'com.gustavofao:JSONApi:1.0.9.4@aar'
+compile 'com.gustavofao:JSONApi:${latestVersion}'
 ```
 
-If the installation fails, add this line to your gradle top level:
+If the installation fails, add this line to your top level gradle:
 
 ```gradle
 maven { url "http://dl.bintray.com/faogustavo/maven" }
@@ -272,9 +272,6 @@ At this moment we can do the mapping listed above (java -> Json):
 * boolean -> Boolean
 * Map -> JSONObject
 * Resouce -> Relationship + Include
-
-## Thanks
-[AceleraMEI](http://www.aceleramei.com.br/) for support the development.
 
 ## License
     Copyright 2016 Gustavo Fão. All rights reserved.
