@@ -1,11 +1,7 @@
-package br.com.gustavofao.jsonapisample.V2;
+package com.gustavofao.jsonapi.testmodels;
 
-import com.gustavofao.jsonapi.Annotations.SerialName;
 import com.gustavofao.jsonapi.Annotations.Type;
 import com.gustavofao.jsonapi.Models.Resource;
-
-import java.util.Date;
-import java.util.List;
 
 @Type("consumers")
 public class User extends Resource {

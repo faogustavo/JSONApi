@@ -1,12 +1,12 @@
-package br.com.gustavofao.jsonapisample.V2;
+package com.gustavofao.jsonapi.testmodels;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import com.gustavofao.jsonapi.Annotations.Type;
+import com.gustavofao.jsonapi.Annotations.Types;
 import com.gustavofao.jsonapi.Models.Resource;
 
-@Type("person")
+@Types({"person", "people"})
 public class Person extends Resource implements Parcelable {
 
     private String name;
@@ -61,7 +61,7 @@ public class Person extends Resource implements Parcelable {
     // =============================================================================================
     // Parcelable Interface
 
-    public final static Parcelable.Creator<Person> CREATOR = new Parcelable.Creator<Person>() {
+    public final static Creator<Person> CREATOR = new Creator<Person>() {
         public Person createFromParcel(final Parcel in) {
             return new Person(in);
         }

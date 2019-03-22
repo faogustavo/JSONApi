@@ -33,17 +33,14 @@ import java.util.Map;
 
 public class JSONApiConverter {
 
-    private static final String DATE_FORMAT_FROM_SERVER = "yyyy-MM-dd'T'HH:mm:ssZ";
-    private static final String DATE_FORMAT_TO_SERVER = "yyyy-MM-dd HH:mm:ssZ";
+    private static final String DATE_FORMAT_SERVER = "yyyy-MM-dd'T'HH:mm:ssZ";
 
-    private SimpleDateFormat dateFormatFromServer;
-    private SimpleDateFormat dateFormatToServer;
+    private SimpleDateFormat dateFormatter;
 
     private HashMap<String, Class<? extends Resource>> classesIndex;
 
     public JSONApiConverter(Class<? extends Resource>... classes) {
-        dateFormatFromServer = new SimpleDateFormat(DATE_FORMAT_FROM_SERVER, Locale.US);
-        dateFormatToServer = new SimpleDateFormat(DATE_FORMAT_TO_SERVER, Locale.US);
+        dateFormatter = new SimpleDateFormat(DATE_FORMAT_SERVER, Locale.US);
 
         classesIndex = new HashMap<>();
         List<Class<? extends Resource>> classList = Arrays.asList(classes);
@@ -66,20 +63,22 @@ public class JSONApiConverter {
     }
 
     public JSONApiConverter(HashMap<String, Class<? extends Resource>> classesIndex) {
-        dateFormatFromServer = new SimpleDateFormat(DATE_FORMAT_FROM_SERVER, Locale.US);
-        dateFormatToServer = new SimpleDateFormat(DATE_FORMAT_TO_SERVER, Locale.US);
-
+        dateFormatter = new SimpleDateFormat(DATE_FORMAT_SERVER, Locale.US);
         this.classesIndex = classesIndex;
     }
 
     public JSONApiConverter withDateFormat(SimpleDateFormat dateFormat) {
-        this.dateFormatFromServer = dateFormat;
-        this.dateFormatToServer = dateFormat;
+        this.dateFormatter = dateFormat;
         return this;
     }
 
-    public Date parseDate(String date) throws ParseException {
-        return dateFormatFromServer.parse(date);
+    public JSONApiConverter withDateFormat(String format) {
+        this.dateFormatter = new SimpleDateFormat(format, Locale.US);
+        return this;
+    }
+
+    private Date parseDate(String date) throws ParseException {
+        return dateFormatter.parse(date);
     }
 
     public String toJson(Resource resource) {
@@ -521,7 +520,7 @@ public class JSONApiConverter {
                                 } else if (listItem instanceof Boolean) {
                                     array.put((boolean) listItem);
                                 } else if (listItem instanceof Date) {
-                                    array.put(dateFormatToServer.format((Date) field.get(resource)).replace(" ", "T"));
+                                    array.put(dateFormatter.format((Date) field.get(resource)).replace(" ", "T"));
                                 } else if (listItem instanceof Map) {
                                     JSONObject obj = new JSONObject();
                                     Map<String, Object> data = (Map) field.get(listItem);
@@ -582,7 +581,7 @@ public class JSONApiConverter {
                         } else if (field.get(resource) instanceof Boolean) {
                             attributes.put(fieldName, field.getBoolean(resource));
                         } else if (field.get(resource) instanceof Date) {
-                            attributes.put(fieldName, dateFormatToServer.format((Date) field.get(resource)).replace(" ", "T"));
+                            attributes.put(fieldName, dateFormatter.format((Date) field.get(resource)).replace(" ", "T"));
                         } else if (field.get(resource) instanceof Map) {
                             JSONObject obj = new JSONObject();
                             Map<String, Object> data = (Map) field.get(resource);
@@ -700,7 +699,7 @@ public class JSONApiConverter {
             } else if (field.get(resource) instanceof Boolean) {
                 attributes.put(fieldName, field.getBoolean(resource));
             } else if (field.get(resource) instanceof Date) {
-                attributes.put(fieldName, dateFormatToServer.format((Date) field.get(resource)).replace(" ", "T"));
+                attributes.put(fieldName, dateFormatter.format((Date) field.get(resource)).replace(" ", "T"));
             }else if (field.get(resource) instanceof Resource) {
                 JSONObject relationshipNode = new JSONObject();
                 relationshipNode.put("data", getNodeAsRelationship(field.get(resource)));

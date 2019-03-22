@@ -1,4 +1,4 @@
-package br.com.gustavofao.jsonapisample.V2;
+package com.gustavofao.jsonapi.testmodels;
 
 import com.gustavofao.jsonapi.Annotations.Type;
 import com.gustavofao.jsonapi.Models.Resource;
