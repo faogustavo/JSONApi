@@ -42,6 +42,7 @@ public class Comment extends Resource {
 
     /*
     Important: If you leave this out, de-serialisation might fail "... has no zero argument constructor"
+    If you use proguard minify, add the rule mentioned in the end of this page.
     */
     public Comment() {}
 
@@ -272,6 +273,16 @@ At this moment we can do the mapping listed above (java -> Json):
 * boolean -> Boolean
 * Map -> JSONObject
 * Resouce -> Relationship + Include
+
+
+## PROGUARD
+
+If you have `minifyEnabled` on your proguard, you have to add this rule to your proguard file.
+This way, you will not receive an error with the message "YourResource has no zero argument constructor".
+
+```
+-keep public class * extends com.gustavofao.jsonapi.Models.Resource
+```
 
 ## License
     Copyright 2016 Gustavo Fão. All rights reserved.
