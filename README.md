@@ -280,6 +280,15 @@ At this moment we can do the mapping listed above (java -> Json):
 If you have `minifyEnabled` on your proguard, you have to add this rule to your proguard file.
 This way, you will not receive an error with the message "YourResource has no zero argument constructor".
 
+
+## Next steps
+- [ ] Add unit tests
+- [ ] Use generics to get the value
+- [ ] Make resources variables protected [#21](https://github.com/faogustavo/JSONApi/issues/21)
+- [ ] Use custom attribute decoders
+- [ ] Create more samples
+- [ ] Parse JSONObjects and arrays/lists under attributes [#12](https://github.com/faogustavo/JSONApi/issues/12)
+
 ```
 -keep public class * extends com.gustavofao.jsonapi.Models.Resource
 ```
