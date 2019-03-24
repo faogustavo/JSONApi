@@ -99,15 +99,15 @@ To deserialize the JSON, you have to pass it as parameter for *fromJson* method.
 The return will be an JSONApiObject.
 
 ```java
-JSONApiObject obj = api.fromJson(json);
+JSONApiObject<Article> obj = api.fromJson(json);
 if (obj.getData().size() > 0) {
     //Success   
     if (obj.getData().size() == 1) {
         //Single Object  
-        Article article = (Article) obj.getData(0);
+        Article article = obj.getData(0);
     } else {
         //List of Objects
-        List<Resource> resources = obj.getData();
+        List<Article> resources = obj.getData();
     }
 } else {
     //Error or empty data
@@ -187,7 +187,7 @@ When you have different types for the same object you can use the annotation @Ty
 Meta data can be retrieved from the JSONApiObject using getMeta()
 
 ```java
-JSONApiObject obj = api.fromJson(json);
+JSONApiObject<Article> obj = api.fromJson(json);
 JSONObject meta = obj.getMeta();
 ```
 
@@ -290,8 +290,8 @@ This way, you will not receive an error with the message "YourResource has no ze
 
 ## Next steps
 - [X] Configure CI and add build badge
-- [ ] Add unit tests
-- [ ] Use generics to get the value
+- [X] Add unit tests
+- [X] Use generics to get the value
 - [ ] Make resources variables protected [#21](https://github.com/faogustavo/JSONApi/issues/21)
 - [ ] Use custom attribute decoders
 - [ ] Create more samples
