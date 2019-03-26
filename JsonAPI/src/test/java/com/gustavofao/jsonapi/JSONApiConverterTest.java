@@ -31,11 +31,11 @@ public class JSONApiConverterTest {
     public void fromJson_shouldSucceed() {
         String json = fileLoader.getContent("jsons/conversation.json");
 
-        JSONApiObject result = subject.fromJson(json);
+        JSONApiObject<Conversation> result = subject.fromJson(json);
 
         assertFalse(result.hasErrors());
 
-        Conversation conversation = (Conversation) result.getData().get(0);
+        Conversation conversation = result.getData().get(0);
         assertEquals("4214653", conversation.getId());
         assertEquals("content", conversation.getMessage());
         assertEquals(new Date(1466014572000L), conversation.getDate());

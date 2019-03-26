@@ -5,9 +5,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JSONApiObject {
+public class JSONApiObject<T extends Resource> {
 
-    private List<Resource> data;
+    private List<T> data;
     private Links links;
     private boolean hasErrors = true;
     private List<ErrorModel> errors;
@@ -17,19 +17,19 @@ public class JSONApiObject {
         data = new ArrayList<>();
     }
 
-    public List<Resource> getData() {
+    public List<T> getData() {
         return data;
     }
 
-    public Resource getData(int position) {
+    public T getData(int position) {
         return data.get(position);
     }
 
-    public void setData(List<Resource> data) {
+    public void setData(List<T> data) {
         this.data = data;
     }
 
-    public void addData(Resource resource) {
+    public void addData(T resource) {
         data.add(resource);
     }
 

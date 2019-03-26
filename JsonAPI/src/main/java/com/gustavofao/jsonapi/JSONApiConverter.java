@@ -95,7 +95,7 @@ public class JSONApiConverter {
         return null;
     }
 
-    public JSONApiObject fromJson(String jsonObject) {
+    public <T extends Resource> JSONApiObject<T> fromJson(String jsonObject) {
         JSONApiObject jsonApiObject = new JSONApiObject();
         try {
             JSONObject json = new JSONObject(jsonObject);
