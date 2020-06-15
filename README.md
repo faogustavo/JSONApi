@@ -1,8 +1,8 @@
 JSONApi
 [![Download](https://api.bintray.com/packages/faogustavo/maven/JSONApi/images/download.svg)](https://bintray.com/faogustavo/maven/JSONApi/_latestVersion)
 [![License](https://img.shields.io/hexpm/l/plug.svg)]()
-[![MinSDK](https://img.shields.io/badge/minSdk-15-brightgreen.svg)]()
-[![Build Status](https://travis-ci.org/faogustavo/JSONApi.svg?branch=master)](https://travis-ci.org/faogustavo/JSONApi)
+![MinSDK](https://img.shields.io/badge/minSdk-15-brightgreen.svg)
+
 =================================================================================================================================================================
 
 A simple way to implement JSONApi specifications to convert Models to Json and Json to Models.

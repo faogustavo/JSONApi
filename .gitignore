@@ -14,9 +14,10 @@
 Thumbs.db
 
 # IDEA/Android Studio ignores
-*.iml
-*.ipr
-*.iws
+**/*.iml
+**/*.ipr
+**/*.iws
+**/*.editorconfig
 **/.idea/shelf
 **/.idea/workspace.xml
 **/.idea/tasks.xml
@@ -30,8 +31,9 @@ Thumbs.db
 **/.idea/runConfigurations.xml
 **/.idea/caches
 **/.idea/assetWizardSettings.xml
+**/.idea/encodings.xml
+**/.idea/codeStyles/codeStyleConfig.xml
+**/.idea/markdown-navigator
 
 ### Android NDK ###
 .externalNativeBuild
-
-\.idea/encodings\.xml
