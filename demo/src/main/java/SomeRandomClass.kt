@@ -1,0 +1,4 @@
+
+@TestAnnotation
+class SomeRandomClass {
+}

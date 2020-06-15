@@ -1,17 +1,30 @@
-# Application files
-*.apk
-*.ap_
+*.class
 
-/.gradle
-/local.properties
-.DS_Store
-/build
-/app/build
-/app/config/detekt/reports
-*\~
+# Package Files #
+*.jar
+*.war
+*.ear
 
-# OS generated files
-Thumbs.db
+.allure
+
+*.iml
+.idea
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+out/
+
+build
+target
+.gradle
+
+allure-results/
+
+# Gradle wrapper
+!gradle/wrapper/gradle-wrapper.jar
+
+local.properties
+*.gpg.enc
 
 # IDEA/Android Studio ignores
 **/*.iml
@@ -34,6 +47,3 @@ Thumbs.db
 **/.idea/encodings.xml
 **/.idea/codeStyles/codeStyleConfig.xml
 **/.idea/markdown-navigator
-
-### Android NDK ###
-.externalNativeBuild
